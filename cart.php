@@ -1,3 +1,14 @@
+<?php
+    session_start();
+    require "./lib/cart.php";
+    require "./models/db.php";
+    require "./models/product.php";
+
+    $mo_cart = new Cart();
+    $mo_product = new Product();
+    $cart_id_list = $mo_cart->getProductIdListFormCart();
+?>
+
 <!DOCTYPE html>
 <html class="no-js" lang="en-US">
 
@@ -853,7 +864,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <form>
+                    <form action="./conf_cart.php" method="post">
                         <!-- Products-List-Wrapper -->
                         <div class="table-wrapper u-s-m-b-60">
                             <table>
@@ -866,18 +877,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php foreach( $cart_id_list as $pro_id => $quantity ) { ?>
+                                    <?php $product = $mo_product->getProductById($pro_id); ?>
                                     <tr>
                                         <td>
                                             <div class="cart-anchor-image">
                                                 <a href="single-product.php">
                                                     <img src="public/images/product/product@1x.jpg" alt="Product">
-                                                    <h6>Casual Hoodie Full Cotton</h6>
+                                                    <h6> <?=$product["name"]?> </h6>
                                                 </a>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="cart-price">
-                                                $55.00
+                                                <?= number_format($product["price"]*$quantity) ?> VND
                                             </div>
                                         </td>
                                         <td>
@@ -891,12 +904,14 @@
                                         </td>
                                         <td>
                                             <div class="action-wrapper">
+                                                <input type="hidden" name="product_id" value="<?=$pro_id?>" />
                                                 <button class="button button-outline-secondary fas fa-sync"></button>
-                                                <button class="button button-outline-secondary fas fa-trash"></button>
+                                                <button class="button button-outline-secondary fas fa-trash" name="delete"></button>
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <?php } ?>
+                                    <!-- <tr>
                                         <td>
                                             <div class="cart-anchor-image">
                                                 <a href="single-product.php">
@@ -985,7 +1000,7 @@
                                                 <button class="button button-outline-secondary fas fa-trash"></button>
                                             </div>
                                         </td>
-                                    </tr>
+                                    </tr> -->
                                 </tbody>
                             </table>
                         </div>

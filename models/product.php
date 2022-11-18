@@ -18,6 +18,15 @@ class Product extends Db{
      */
     public function getProductById( $id ) {
         $sql = "select * from products where id = ".$id;
+        $ret = parent::fetchSingle( $sql );
+        return $ret;
+    }
+
+    public function getProductByIds( $id_list ) {
+        if( !is_array( $id_list ) ) return array();
+
+        $id_str = implode( ",", $id_list );
+        $sql = "select * from products where id in (".$id_str.") ";
         $ret = parent::fetchArray( $sql );
         return $ret;
     }

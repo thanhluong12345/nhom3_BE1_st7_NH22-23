@@ -8,7 +8,7 @@ class Db {
     private $username = USERNAME;
     private $password = PASSWORD;
 
-    public function connect() {
+    protected function connect() {
         try {
             $dbh = new PDO("mysql:host=".$this->host.";dbname=".$this->db_name, $this->username, $this->password);
             return $dbh;
@@ -22,7 +22,7 @@ class Db {
      * $sql @string
      * return @object
      */
-    public function execute( $sql ) {
+    protected function execute( $sql ) {
         $con = $this->connect();
         $sth = $con->query($sql);
         return $sth;
@@ -32,9 +32,15 @@ class Db {
      * $sql @string
      * return @array()
      */
-    public function fetchArray( $sql ) {
+    protected function fetchArray( $sql ) {
         $query = $this->execute( $sql );
         $ret = $query->fetchAll();
+        return $ret;
+    }
+
+    protected function fetchSingle( $sql ) {
+        $query = $this->execute( $sql );
+        $ret = $query->fetch();
         return $ret;
     }
 }

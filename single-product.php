@@ -979,7 +979,6 @@
                             </div>
                         </div>
                         <div class="section-6-social-media-quantity-actions u-s-p-y-14">
-                            <form action="#" class="post-form">
                                 <div class="quick-social-media-wrapper u-s-m-b-22">
                                     <span>Share:</span>
                                     <ul class="social-media-list">
@@ -1013,17 +1012,17 @@
                                 <div class="quantity-wrapper u-s-m-b-22">
                                     <span>Quantity:</span>
                                     <div class="quantity">
-                                        <input type="text" class="quantity-text-field" value="1">
+                                        <input type="text" name="quantity" class="quantity-text-field" value="1">
                                         <a class="plus-a" data-max="1000">&#43;</a>
                                         <a class="minus-a" data-min="1">&#45;</a>
                                     </div>
                                 </div>
                                 <div>
-                                    <button class="button button-outline-secondary" type="submit">Add to cart</button>
+                                    <input type="hidden" name="product_id" value="1"/>
+                                    <input class="button button-outline-secondary" onclick="addToCart(1,2)" name="add" type="submit" value="Add to cart" />
                                     <button class="button button-outline-secondary far fa-heart u-s-m-l-6"></button>
                                     <button class="button button-outline-secondary far fa-envelope u-s-m-l-6"></button>
                                 </div>
-                            </form>
                         </div>
                     </div>
                     <!-- Product-details /- -->
@@ -1981,7 +1980,7 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <button class="button button-outline-secondary" type="submit">Add to cart</button>
+                                            <button class="button button-outline-secondary" onclick="addCart(1,2)" type="submit">Add to cart</button>
                                             <button class="button button-outline-secondary far fa-heart u-s-m-l-6"></button>
                                             <button class="button button-outline-secondary far fa-envelope u-s-m-l-6"></button>
                                         </div>
@@ -2066,5 +2065,6 @@ ga('send', 'pageview')
 <script type="text/javascript" src="public/js/owl.carousel.min.js"></script>
 <!-- Main -->
 <script type="text/javascript" src="public/js/app.js"></script>
+<script type="text/javascript" src="public/js/custom/cart.js"></script>
 </body>
 </html>
