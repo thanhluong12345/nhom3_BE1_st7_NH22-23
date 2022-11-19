@@ -1,5 +1,10 @@
 <?php
-    require "./lib/func.php";
+session_start();
+require "./models/db.php";
+require "./models/product.php";
+require "./lib/func.php";
+$mo_product = new Product();
+$product_id_list = $mo_product->getProductManuId($_GET['manu_id']);
 ?>
 
 <?=l_func_GetHeader("Home")?>

@@ -22,6 +22,10 @@ class Product extends Db{
         return $ret;
     }
 
+    
+
+
+
     public function getProductByIds( $id_list ) {
         if( !is_array( $id_list ) ) return array();
 
@@ -30,4 +34,11 @@ class Product extends Db{
         $ret = parent::fetchArray( $sql );
         return $ret;
     }
+
+    public function getProductManuId( $manu_id) {
+        $sql = "select * from products where manu_id = ".$manu_id;
+        $ret = parent::fetchArray( $sql );
+        return $ret;
+    }
+
 }

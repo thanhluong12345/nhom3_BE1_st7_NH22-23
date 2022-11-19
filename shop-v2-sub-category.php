@@ -268,8 +268,8 @@
                                     <ul class="v-list animated fadeIn">
                                         <li class="js-backdrop">
                                             <a href="shop-v1-root-category.php">
-                                                <i class="ion ion-md-shirt"></i>
-                                                Men's Clothing
+                                                <i class="ion ion-md-phone-portrait"></i>
+                                                Điện thoại
                                                 <i class="ion ion-ios-arrow-forward"></i>
                                             </a>
                                             <button class="v-button ion ion-md-add"></button>
@@ -411,7 +411,7 @@
                                         <li class="js-backdrop">
                                             <a href="shop-v1-root-category.php">
                                                 <i class="ion ion-ios-shirt"></i>
-                                                Women's Clothing
+                                                Laptop
                                                 <i class="ion ion-ios-arrow-forward"></i>
                                             </a>
                                             <button class="v-button ion ion-md-add"></button>
@@ -563,7 +563,7 @@
                                         <li class="js-backdrop">
                                             <a href="shop-v1-root-category.php">
                                                 <i class="ion ion-md-rocket"></i>
-                                                Toys Hobbies & Robots
+                                                Máy tính bảng
                                                 <i class="ion ion-ios-arrow-forward"></i>
                                             </a>
                                             <button class="v-button ion ion-md-add"></button>
@@ -653,25 +653,25 @@
                                         <li>
                                             <a href="shop-v1-root-category.php">
                                                 <i class="ion ion-md-phone-portrait"></i>
-                                                Mobiles & Tablets
+                                                Bàn phím
                                             </a>
                                         </li>
                                         <li>
                                             <a href="shop-v1-root-category.php">
                                                 <i class="ion ion-md-tv"></i>
-                                                Consumer Electronics
+                                                Chuột
                                             </a>
                                         </li>
                                         <li>
                                             <a href="shop-v1-root-category.php">
                                                 <i class="ion ion-ios-book"></i>
-                                                Books & Audible
+                                                USB
                                             </a>
                                         </li>
                                         <li>
                                             <a href="shop-v1-root-category.php">
                                                 <i class="ion ion-md-heart"></i>
-                                                Beauty & Health
+                                                Tai nghe
                                             </a>
                                         </li>
                                         <li class="v-none" style="display: none">
