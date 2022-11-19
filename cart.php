@@ -7,6 +7,8 @@
     $mo_cart = new Cart();
     $mo_product = new Product();
     $cart_id_list = $mo_cart->getProductIdListFormCart();
+
+    $total_price = 0;
 ?>
 
 <?php
@@ -38,7 +40,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <form action="./conf_cart.php" method="post">
                         <!-- Products-List-Wrapper -->
                         <div class="table-wrapper u-s-m-b-60">
                             <table>
@@ -53,6 +54,7 @@
                                 <tbody>
                                     <?php foreach( $cart_id_list as $pro_id => $quantity ) { ?>
                                     <?php $product = $mo_product->getProductById($pro_id); ?>
+                                    <?php $total_price = $total_price + $product['price'] * $quantity;  ?>
                                     <tr>
                                         <td>
                                             <div class="cart-anchor-image">
@@ -80,7 +82,7 @@
                                             <div class="action-wrapper">
                                                 <input type="hidden" name="product_id" value="<?=$pro_id?>" />
                                                 <button class="button button-outline-secondary fas fa-sync"></button>
-                                                <button class="button button-outline-secondary fas fa-trash" name="delete"></button>
+                                                <button class="button button-outline-secondary fas fa-trash" name="delete" onclick="removeCart(<?=$pro_id?>)" ></button>
                                             </div>
                                         </td>
                                     </tr>
@@ -195,7 +197,6 @@
                             </div>
                         </div>
                         <!-- Coupon /- -->
-                    </form>
                     <!-- Billing -->
                     <div class="calculation u-s-m-b-60">
                         <div class="table-wrapper-2">
@@ -206,15 +207,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <!-- <tr>
                                         <td>
                                             <h3 class="calc-h3 u-s-m-b-0">Subtotal</h3>
                                         </td>
                                         <td>
-                                            <span class="calc-text">$222.00</span>
+                                            <span class="calc-text"></span>
                                         </td>
-                                    </tr>
-                                    <tr>
+                                    </tr> -->
+                                    <!-- <tr>
                                         <td>
                                             <h3 class="calc-h3 u-s-m-b-8">Shipping</h3>
                                             <div class="calc-choice-text u-s-m-b-4">Flat Rate: Not Available</div>
@@ -274,13 +275,13 @@
                                         <td>
                                             <span class="calc-text">$0.00</span>
                                         </td>
-                                    </tr>
+                                    </tr> -->
                                     <tr>
                                         <td>
                                             <h3 class="calc-h3 u-s-m-b-0">Total</h3>
                                         </td>
                                         <td>
-                                            <span class="calc-text">$220.00</span>
+                                            <span class="calc-text"><?=$total_price?></span>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -292,4 +293,10 @@
             </div>
         </div>
     </div>
-    <?=l_func_getFooter()?>
+
+    <?php 
+        $script = 
+        "<script type=\"text/javascript\" src=\"public/js/custom/cart.js\"></script>";
+    ?>
+
+    <?=l_func_getFooter( $script )?>

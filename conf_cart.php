@@ -29,8 +29,8 @@ else if( isset($_POST["add"]) ) {
     $quantity   = $_POST["quantity"];
     //add a product to cart
     $mo_cart->addToCart( $product_id, $quantity );
-    header("Location: ./cart.php" );
-    exit;
+    $update = include "./single-product.php";
+    echo $update;
 } 
 else {
     header( "Location: ./home.php" );

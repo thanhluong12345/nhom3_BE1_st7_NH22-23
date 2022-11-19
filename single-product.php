@@ -1,4 +1,7 @@
 <?php
+    if( session_id() == "" ) {
+        session_start();
+    }
     require "./lib/func.php";
 ?>
 
@@ -811,8 +814,11 @@
             <!-- Different-Product-Section /- -->
         </div>
     </div>
-    <script type="text/javascript" src="public/js/app.js"></script>
-    <script type="text/javascript" src="public/js/custom/cart.js"></script>
-    <?=l_func_getFooter()?>
+
+    <?php 
+        $script = 
+        "<script type=\"text/javascript\" src=\"public/js/custom/cart.js\"></script>";
+    ?>
+    <?=l_func_getFooter( $script )?>
 
 
