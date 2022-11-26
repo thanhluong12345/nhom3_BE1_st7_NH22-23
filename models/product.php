@@ -11,7 +11,11 @@ class Product extends Db{
         $ret = parent::fetchArray( $sql );
         return $ret;
     }
-
+    // public function getProductByMenuid($manu_id) {
+    //     $sql = "select * from products where manu_id = ".$manu_id;
+    //     $ret = parent::fetchSingle( $sql );
+    //     return $ret;
+    // }
     /**
      * lấy product bằng id
      * return @array()
@@ -27,6 +31,12 @@ class Product extends Db{
 
         $id_str = implode( ",", $id_list );
         $sql = "select * from products where id in (".$id_str.") ";
+        $ret = parent::fetchArray( $sql );
+        return $ret;
+    }
+
+    public function getProductByMenuid( $manu_id ) {
+        $sql = "select * from products where manu_id = $manu_id ";
         $ret = parent::fetchArray( $sql );
         return $ret;
     }
