@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+require "lib/func.php";
 require "./lib/cart.php";
 require "./models/db.php";
 require "./models/product.php";
@@ -27,9 +27,10 @@ if( isset($_POST["delete"]) ) {
 } 
 else if( isset($_POST["add"]) ) {
     $quantity   = $_POST["quantity"];
+    $page = $_POST["page"];
     //add a product to cart
     $mo_cart->addToCart( $product_id, $quantity );
-    $update = include "./single-product.php";
+    $update = include "./".$page.".php";
     echo $update;
 } 
 else {

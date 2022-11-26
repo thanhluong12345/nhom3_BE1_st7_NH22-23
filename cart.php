@@ -1,18 +1,14 @@
 <?php
-    session_start();
+    
+    require "lib/func.php";
     require "./lib/cart.php";
-    require "./models/db.php";
-    require "./models/product.php";
 
     $mo_cart = new Cart();
-    $mo_product = new Product();
-    $cart_id_list = $mo_cart->getProductIdListFormCart();
-
-    $total_price = 0;
+    $product_list = $mo_cart->getProductListInCart();
 ?>
 
 <?php
-    require "./lib/func.php";
+    
 ?>
 
 <?=l_func_GetHeader("Home")?>
@@ -52,9 +48,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach( $cart_id_list as $pro_id => $quantity ) { ?>
-                                    <?php $product = $mo_product->getProductById($pro_id); ?>
-                                    <?php $total_price = $total_price + $product['price'] * $quantity;  ?>
+                                    <?php foreach( $product_list["products"] as $product ) { ?>
                                     <tr>
                                         <td>
                                             <div class="cart-anchor-image">
@@ -66,13 +60,13 @@
                                         </td>
                                         <td>
                                             <div class="cart-price">
-                                                <?= number_format($product["price"]*$quantity) ?> VND
+                                                <?= number_format($product_list["total_price"]) ?> VND
                                             </div>
                                         </td>
                                         <td>
                                             <div class="cart-quantity">
                                                 <div class="quantity">
-                                                    <input type="text" class="quantity-text-field" value="1">
+                                                    <input type="text" class="quantity-text-field" value="<?=$product["num_cart"]?>">
                                                     <a class="plus-a" data-max="1000">&#43;</a>
                                                     <a class="minus-a" data-min="1">&#45;</a>
                                                 </div>
@@ -80,117 +74,27 @@
                                         </td>
                                         <td>
                                             <div class="action-wrapper">
-                                                <input type="hidden" name="product_id" value="<?=$pro_id?>" />
+                                                <input type="hidden" name="product_id" value="<?=$product["id"]?>" />
                                                 <button class="button button-outline-secondary fas fa-sync"></button>
-                                                <button class="button button-outline-secondary fas fa-trash" name="delete" onclick="removeCart(<?=$pro_id?>)" ></button>
+                                                <button class="button button-outline-secondary fas fa-trash" name="delete" onclick="removeCart(<?=$product["id"]?>)" ></button>
                                             </div>
                                         </td>
                                     </tr>
                                     <?php } ?>
-                                    <!-- <tr>
-                                        <td>
-                                            <div class="cart-anchor-image">
-                                                <a href="single-product.php">
-                                                    <img src="public/images/product/product@1x.jpg" alt="Product">
-                                                    <h6>Black Rock Dress with High Jewelery Necklace</h6>
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="cart-price">
-                                                $55.00
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="cart-quantity">
-                                                <div class="quantity">
-                                                    <input type="text" class="quantity-text-field" value="1">
-                                                    <a class="plus-a" data-max="1000">&#43;</a>
-                                                    <a class="minus-a" data-min="1">&#45;</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="action-wrapper">
-                                                <button class="button button-outline-secondary fas fa-sync"></button>
-                                                <button class="button button-outline-secondary fas fa-trash"></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="cart-anchor-image">
-                                                <a href="single-product.php">
-                                                    <img src="public/images/product/product@1x.jpg" alt="Product">
-                                                    <h6>Xiaomi Note 2 Black Color</h6>
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="cart-price">
-                                                $55.00
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="cart-quantity">
-                                                <div class="quantity">
-                                                    <input type="text" class="quantity-text-field" value="1">
-                                                    <a class="plus-a" data-max="1000">&#43;</a>
-                                                    <a class="minus-a" data-min="1">&#45;</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="action-wrapper">
-                                                <button class="button button-outline-secondary fas fa-sync"></button>
-                                                <button class="button button-outline-secondary fas fa-trash"></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="cart-anchor-image">
-                                                <a href="single-product.php">
-                                                    <img src="public/images/product/product@1x.jpg" alt="Product">
-                                                    <h6>Dell Inspiron 15</h6>
-                                                </a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="cart-price">
-                                                $55.00
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="cart-quantity">
-                                                <div class="quantity">
-                                                    <input type="text" class="quantity-text-field" value="1">
-                                                    <a class="plus-a" data-max="1000">&#43;</a>
-                                                    <a class="minus-a" data-min="1">&#45;</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="action-wrapper">
-                                                <button class="button button-outline-secondary fas fa-sync"></button>
-                                                <button class="button button-outline-secondary fas fa-trash"></button>
-                                            </div>
-                                        </td>
-                                    </tr> -->
                                 </tbody>
                             </table>
                         </div>
                         <!-- Products-List-Wrapper /- -->
                         <!-- Coupon -->
                         <div class="coupon-continue-checkout u-s-m-b-60">
-                            <div class="coupon-area">
+                            <!-- <div class="coupon-area">
                                 <h6>Enter your coupon code if you have one.</h6>
                                 <div class="coupon-field">
                                     <label class="sr-only" for="coupon-code">Apply Coupon</label>
                                     <input id="coupon-code" type="text" class="text-field" placeholder="Coupon Code">
                                     <button type="submit" class="button">Apply Coupon</button>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="button-area">
                                 <a href="shop-v1-root-category.php" class="continue">Continue Shopping</a>
                                 <a href="checkout.php" class="checkout">Proceed to Checkout</a>
@@ -281,7 +185,7 @@
                                             <h3 class="calc-h3 u-s-m-b-0">Total</h3>
                                         </td>
                                         <td>
-                                            <span class="calc-text"><?=$total_price?></span>
+                                            <span class="calc-text"><?=number_format($product_list["total_price"])?> <b>VND</b></span>
                                         </td>
                                     </tr>
                                 </tbody>

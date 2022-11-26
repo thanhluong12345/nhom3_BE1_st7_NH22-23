@@ -1,5 +1,5 @@
 <?php
-    require "./lib/func.php";
+    require "lib/func.php";
 ?>
 
 <?=l_func_GetHeader("Home")?>
@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12">
                     <!-- First-Accordion -->
-                    <div>
+                    <!-- <div>
                         <div class="message-open u-s-m-b-24">
                             Returning customer?
                             <strong>
@@ -64,10 +64,10 @@
                                 </div>
                             </form>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- First-Accordion /- -->
                     <!-- Second Accordion -->
-                    <div>
+                    <!-- <div>
                         <div class="message-open u-s-m-b-24">
                             Have a coupon?
                             <strong>
@@ -84,7 +84,7 @@
                                 <button type="submit" class="button">Apply Coupon</button>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- Second Accordion /- -->
                     <form>
                         <div class="row">

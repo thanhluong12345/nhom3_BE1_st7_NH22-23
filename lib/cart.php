@@ -49,6 +49,36 @@ class Cart {
             $id_list[$pro_id] = $quan;
         }
         return $id_list;
-    } 
+    }
+
+    public function getProductListInCart() {
+        require_once "models/db.php";
+        require_once "models/product.php";
+        $mo_product = new Product();
+        $total_price = 0;
+        $cart_list = $this->getProductIdListFormCart();
+
+        $product_list =
+            array(
+                "products"      => array(),
+                "total_price"   => 0,
+                "number"        => 0
+            );
+        foreach( $cart_list as $pro_id => $quantity ) {
+            $product = $mo_product->getProductById($pro_id);
+            if( !$product ) {continue;}
+
+            $price_cart = $product['price'] * $quantity;
+            $total_price = $total_price + $price_cart;
+
+            $product["price_cart"] = $price_cart;
+            $product["num_cart"] = $quantity;
+            $product_list["products"][] = $product;
+        }
+        $product_list["total_price"] = $total_price;
+        $product_list["number"] = count($cart_list);
+
+        return $product_list;
+    }
     
 }

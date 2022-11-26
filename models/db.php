@@ -1,17 +1,16 @@
 <?php
 
-require "lib/config.php";
-
 class Db {
     private $host = HOST;
     private $db_name = DB_NAME;
     private $username = USERNAME;
     private $password = PASSWORD;
+    protected $dbh;
 
     protected function connect() {
         try {
-            $dbh = new PDO("mysql:host=".$this->host.";dbname=".$this->db_name, $this->username, $this->password);
-            return $dbh;
+            $this->dbh = new PDO("mysql:host=".$this->host.";dbname=".$this->db_name, $this->username, $this->password);
+            return $this->dbh;
         } catch (PDOException $e) {
             print "Error!: " . $e->getMessage() . "<br/>";
             die();
@@ -23,8 +22,13 @@ class Db {
      * return @object
      */
     protected function execute( $sql ) {
-        $con = $this->connect();
-        $sth = $con->query($sql);
+        try {
+            $con = $this->connect();
+            $sth = $this->dbh->query($sql);
+        }
+        catch (Exception $ex) {
+            return false;
+        }
         return $sth;
     }
 
@@ -34,12 +38,18 @@ class Db {
      */
     protected function fetchArray( $sql ) {
         $query = $this->execute( $sql );
+        if( !$query ) {
+            return false;
+        }
         $ret = $query->fetchAll();
         return $ret;
     }
 
     protected function fetchSingle( $sql ) {
         $query = $this->execute( $sql );
+        if( !$query ) {
+            return false;
+        }
         $ret = $query->fetch();
         return $ret;
     }

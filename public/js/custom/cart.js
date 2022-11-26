@@ -2,8 +2,8 @@
 
 if (typeof window !== 'undefined') {
     
-  function addToCart( product_id, quantity ) {
-      if( !product_id || !quantity ) {
+  function addToCart( product_id, quantity, page = "" ) {
+      if( !product_id || !quantity || !page ) {
           console.log("not found "+ !product_id?"product_id":"quantity")
       } 
       else {
@@ -19,9 +19,9 @@ if (typeof window !== 'undefined') {
               console.log(xmlhttp.statusText)
             }
           }
-          xmlhttp.open("POST", "./conf_cart.php");
+          xmlhttp.open("POST", "./action/conf_cart.php");
           xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-          xmlhttp.send("product_id="+product_id+"&quantity="+quantity+"&add=1");
+          xmlhttp.send("product_id="+product_id+"&quantity="+quantity+"&add=1&page="+page);
       }
   }
 
@@ -39,7 +39,7 @@ if (typeof window !== 'undefined') {
             console.log(xmlhttp.statusText)
           }
         }
-        xmlhttp.open("POST", "./conf_cart.php");
+        xmlhttp.open("POST", "./action/conf_cart.php");
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.send("product_id="+product_id+"&delete=1");
     }

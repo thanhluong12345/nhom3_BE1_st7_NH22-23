@@ -1,8 +1,5 @@
 <?php
-    if( session_id() == "" ) {
-        session_start();
-    }
-    require "./lib/func.php";
+    require "lib/func.php";
 ?>
 
 <?=l_func_GetHeader("Home")?>
@@ -196,7 +193,7 @@
                                 </div>
                                 <div>
                                     <input type="hidden" name="product_id" value="1"/>
-                                    <input class="button button-outline-secondary" onclick="addToCart(1,2)" name="add" type="submit" value="Add to cart" />
+                                    <input class="button button-outline-secondary" onclick="addToCart(19,2,'single-product')" name="add" type="submit" value="Add to cart" />
                                     <button class="button button-outline-secondary far fa-heart u-s-m-l-6"></button>
                                     <button class="button button-outline-secondary far fa-envelope u-s-m-l-6"></button>
                                 </div>

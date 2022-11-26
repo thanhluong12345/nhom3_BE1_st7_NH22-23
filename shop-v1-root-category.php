@@ -1,5 +1,5 @@
 <?php
-    require "./lib/func.php";
+    require "lib/func.php";
 ?>
 
 <?=l_func_GetHeader("Home")?>
