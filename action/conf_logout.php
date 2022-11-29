@@ -1,5 +1,6 @@
 <?php
-require "lib/func.php";
+require "../lib/config.php";
+require ROOT_LIB_PATH."/func.php";
 
 if( isset( $_SESSION["isLogged"] ) ) {
     unset( $_SESSION["isLogged"] );

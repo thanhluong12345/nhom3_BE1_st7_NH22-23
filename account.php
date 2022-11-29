@@ -1,12 +1,13 @@
 <?php
 
-    require "lib/func.php";
-    require "models/db.php";
-    require "models/user.php";
-    require "models/user_member.php";
+    require "./lib/config.php";
+    require ROOT_LIB_PATH."/func.php";
+    require ROOT_MODEL_PATH."/db.php";
+    require ROOT_MODEL_PATH."/user.php";
+    require ROOT_MODEL_PATH."/user_member.php";
 
     $mo_member = new UserMember();
-    $mo_member->checkLogin("home.php");
+    $mo_member->checkLogin("home.php", true);
 ?>
 
 <?=l_func_GetHeader("Home")?>
@@ -16,14 +17,14 @@
     <div class="page-style-a">
         <div class="container">
             <div class="page-intro">
-                <h2>Account</h2>
+                <h2>Tài khoản</h2>
                 <ul class="bread-crumb">
                     <li class="has-separator">
                         <i class="ion ion-md-home"></i>
-                        <a href="home.php">Home</a>
+                        <a href="<?=PAGE_URL."/home.php"?>">Trang chủ</a>
                     </li>
                     <li class="is-marked">
-                        <a href="account.php">Account</a>
+                        <a href="<?=PAGE_URL."/account.php"?>">Tài khoản</a>
                     </li>
                 </ul>
             </div>
@@ -37,23 +38,23 @@
                 <!-- Login -->
                 <div class="col-lg-6">
                     <div class="login-wrapper">
-                        <h2 class="account-h2 u-s-m-b-20">Login</h2>
-                        <h6 class="account-h6 u-s-m-b-30">Welcome back! Sign in to your account.</h6>
+                        <h2 class="account-h2 u-s-m-b-20">Đăng nhập</h2>
+                        <h6 class="account-h6 u-s-m-b-30">Nhập thông tin đăng nhập của bạn tại đây!</h6>
                         <p class="error"><?=$_SESSION["errors"]["error_common"]??""?></p>
                         <form action="action/conf_login.php" method="POST">
                             <div class="u-s-m-b-30">
-                                <label for="user-name-email">Username or Email
+                                <label for="user-name-email">Username
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="text" id="user-name-email" class="text-field" name="username" placeholder="Username / Email">
+                                <input type="text" id="user-name-email" class="text-field" name="username" placeholder="Username">
                             </div>
                             <div class="u-s-m-b-30">
-                                <label for="login-password">Password
+                                <label for="login-password">Mật khẩu
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="text" id="login-password" class="text-field" name="password" placeholder="Password">
+                                <input type="password" id="login-password" class="text-field" name="password" placeholder="Mật khẩu">
                             </div>
-                            <div class="group-inline u-s-m-b-30">
+                            <!-- <div class="group-inline u-s-m-b-30">
                                 <div class="group-1">
                                     <input type="checkbox" class="check-box" id="remember-me-token">
                                     <label class="label-text" for="remember-me-token">Remember me</label>
@@ -61,12 +62,12 @@
                                 <div class="group-2 text-right">
                                     <div class="page-anchor">
                                         <a href="lost-password.php">
-                                            <i class="fas fa-circle-o-notch u-s-m-r-9"></i>Lost your password?</a>
+                                            <i class="fas fa-circle-o-notch u-s-m-r-9"></i>Quên mật khẩu?</a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="m-b-45">
-                                <button class="button button-outline-secondary w-100" name="login">Login</button>
+                                <button class="button button-outline-secondary w-100" name="login">Đăng nhập</button>
                             </div>
                         </form>
                     </div>
@@ -75,7 +76,7 @@
                 <!-- Register -->
                 <div class="col-lg-6">
                     <div class="reg-wrapper">
-                        <h2 class="account-h2 u-s-m-b-20">Register</h2>
+                        <h2 class="account-h2 u-s-m-b-20">Đăng ký</h2>
                         <p class="error"><?=$_SESSION["errors"]["error_common"]??""?></p>
                         <!-- <h6 class="account-h6 u-s-m-b-30">Registering for this site allows you to access your order status and history.</h6> -->
                         <form action="./action/conf_register.php" method="POST">
@@ -88,29 +89,30 @@
                             </div>
                             
                             <div class="u-s-m-b-30">
-                                <label for="password">Password
+                                <label for="password">Mật khẩu
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="text" id="password" class="text-field" name="password" placeholder="Password">
+                                <input type="password" id="password" class="text-field" name="password" placeholder="Mật khẩu">
                                 <p class="error"><?=$_SESSION["errors"]["password"]??""?></p>
                             </div>
                             
                             <div class="u-s-m-b-30">
-                                <label for="confirm_password">Confirm password
+                                <label for="confirm_password">Xác nhận mật khẩu
                                     <span class="astk">*</span>
                                 </label>
-                                <input type="text" id="confirm_password" class="text-field" name="confirm_password" placeholder="Confirm password">
+                                <input type="password" id="confirm_password" class="text-field" name="confirm_password" placeholder="Xác nhận mật khẩu">
                                 <p class="error"><?=$_SESSION["errors"]["confirm_password"]??""?></p>
                             </div>
                            
                             <div class="u-s-m-b-30">
                                 <input type="checkbox" class="check-box" id="accept" name="term_condition">
-                                <label class="label-text no-color" for="accept">I’ve read and accept the
-                                    <a href="terms-and-conditions.php" class="u-c-brand">terms & conditions</a>
+                                <label class="label-text no-color" for="accept">Tôi đã đọc và chập nhận
+                                    <a href="terms-and-conditions.php" class="u-c-brand">điều khoản & điều kiện</a>
                                 </label>
+                                <p class="error"><?=$_SESSION["errors"]["term_condition"]??""?></p>
                             </div>
                             <div class="u-s-m-b-45">
-                                <button class="button button-primary w-100" name="register">Register</button>
+                                <button class="button button-primary w-100" name="register">Đăng ký</button>
                             </div>
                         </form>
                     </div>

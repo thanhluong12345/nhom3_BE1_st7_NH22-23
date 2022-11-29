@@ -27,8 +27,7 @@ class Db {
             $sth = $this->dbh->query($sql);
         }
         catch (Exception $ex) {
-            return false;
-        }
+return false;        }
         return $sth;
     }
 
@@ -39,7 +38,7 @@ class Db {
     protected function fetchArray( $sql ) {
         $query = $this->execute( $sql );
         if( !$query ) {
-            return false;
+            return array();
         }
         $ret = $query->fetchAll();
         return $ret;
@@ -48,7 +47,7 @@ class Db {
     protected function fetchSingle( $sql ) {
         $query = $this->execute( $sql );
         if( !$query ) {
-            return false;
+            return array();
         }
         $ret = $query->fetch();
         return $ret;

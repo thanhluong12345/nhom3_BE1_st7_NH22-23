@@ -1,5 +1,23 @@
 <?php
-    require "lib/func.php";
+    require "./lib/config.php";
+    require_once ROOT_LIB_PATH."/func.php";
+    require ROOT_MODEL_PATH."/db.php";
+    require ROOT_MODEL_PATH."/product.php";
+
+    $id = $_GET["id"];
+    if( !preg_match( "/^[1-9][0-9]*$/", $id ) ) { 
+        header("Location: ".PAGE_URL."/home.php");
+        exit;
+    }
+
+    $mo_product = new Product();
+    $product_detail = $mo_product->getProductById( $id );
+    if( empty($product_detail) ) {
+        header("Location: ".PAGE_URL."/home.php");
+        exit;
+    }
+
+    $similar_product = $mo_product->getProductLatestByTypeId( $product_detail["type_id"], 4 );
 ?>
 
 <?=l_func_GetHeader("Home")?>
@@ -8,14 +26,14 @@
     <div class="page-style-a">
         <div class="container">
             <div class="page-intro">
-                <h2>Detail</h2>
+                <h2><?=$product_detail["name"]?></h2>
                 <ul class="bread-crumb">
                     <li class="has-separator">
                         <i class="ion ion-md-home"></i>
-                        <a href="home.php">Home</a>
+                        <a href="<?=PAGE_URL."/home.php"?>">Trang chủ</a>
                     </li>
                     <li class="is-marked">
-                        <a href="single-product.php">Detail</a>
+                        <a href="<?=PAGE_URL."/single-product.php?id".$product_detail["id"]?>"><?=$product_detail["name"]?></a>
                     </li>
                 </ul>
             </div>
@@ -30,10 +48,10 @@
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <!-- Product-zoom-area -->
                     <div class="zoom-area">
-                        <img id="zoom-pro" class="img-fluid" src="public/images/product/product@4x.jpg" data-zoom-image="public/images/product/product@4x.jpg" alt="Zoom Image">
+                        <img id="zoom-pro" class="img-fluid" src="<?=ROOT_IMAGE_URL."/product/".$product_detail["image"]?>" data-zoom-image="<?=ROOT_IMAGE_URL."/product/".$product_detail["image"]?>" alt="Zoom Image">
                         <div id="gallery" class="u-s-m-t-10">
-                            <a class="active" data-image="public/images/product/product@4x.jpg" data-zoom-image="public/images/product/product@4x.jpg">
-                                <img src="public/images/product/product@2x.jpg" alt="Product">
+                            <a class="active" data-image="<?=ROOT_IMAGE_URL."/product/".$product_detail["image"]?>" data-zoom-image="<?=ROOT_IMAGE_URL."/product/".$product_detail["image"]?>">
+                                <img src="<?=ROOT_IMAGE_URL."/product/".$product_detail["image"]?>" alt="Product">
                             </a>
                             <a data-image="public/images/product/product@4x.jpg" data-zoom-image="public/images/product/product@4x.jpg">
                                 <img src="public/images/product/product@2x.jpg" alt="Product">
@@ -60,7 +78,7 @@
                         <div class="section-1-title-breadcrumb-rating">
                             <div class="product-title">
                                 <h1>
-                                    <a href="single-product.php">Casual Hoodie Full Cotton</a>
+                                    <a href="single-product.php"><?=$product_detail["name"]?></a>
                                 </h1>
                             </div>
                             <ul class="bread-crumb">
@@ -86,14 +104,15 @@
                         </div>
                         <div class="section-2-short-description u-s-p-y-14">
                             <h6 class="information-heading u-s-m-b-8">Description:</h6>
-                            <p>This hoodie is full cotton. It includes a muff sewn onto the lower front, and (usually) a drawstring to adjust the hood opening. Throughout the U.S., it is common for middle-school, high-school, and college students to wear this sweatshirts—with or without hoods—that display their respective school names or mascots across the chest, either as part of a uniform or personal preference.
+                            <p>
+                                <?=$product_detail["description"]?>
                             </p>
                         </div>
                         <div class="section-3-price-original-discount u-s-p-y-14">
                             <div class="price">
-                                <h4>$55.00</h4>
+                                <h4><?=number_format($product_detail["price"])?> VND</h4>
                             </div>
-                            <div class="original-price">
+                            <!-- <div class="original-price">
                                 <span>Original Price:</span>
                                 <span>$60.00</span>
                             </div>
@@ -104,9 +123,9 @@
                             <div class="total-save">
                                 <span>Save:</span>
                                 <span>$5</span>
-                            </div>
+                            </div> -->
                         </div>
-                        <div class="section-4-sku-information u-s-p-y-14">
+                        <!-- <div class="section-4-sku-information u-s-p-y-14">
                             <h6 class="information-heading u-s-m-b-8">Sku Information:</h6>
                             <div class="availability">
                                 <span>Availability:</span>
@@ -116,8 +135,8 @@
                                 <span>Only:</span>
                                 <span>50 left</span>
                             </div>
-                        </div>
-                        <div class="section-5-product-variants u-s-p-y-14">
+                        </div> -->
+                        <!-- <div class="section-5-product-variants u-s-p-y-14">
                             <h6 class="information-heading u-s-m-b-8">Product Variants:</h6>
                             <div class="color u-s-m-b-11">
                                 <span>Available Color:</span>
@@ -151,7 +170,7 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="section-6-social-media-quantity-actions u-s-p-y-14">
                                 <div class="quick-social-media-wrapper u-s-m-b-22">
                                     <span>Share:</span>
@@ -193,7 +212,7 @@
                                 </div>
                                 <div>
                                     <input type="hidden" name="product_id" value="1"/>
-                                    <input class="button button-outline-secondary" onclick="addToCart(19,2,'single-product')" name="add" type="submit" value="Add to cart" />
+                                    <input class="button button-outline-secondary" onclick="addToCart(<?=$product_detail['id']?>,'single-product.php')" name="add" type="submit" value="Thêm vào giỏ hàng" />
                                     <button class="button button-outline-secondary far fa-heart u-s-m-l-6"></button>
                                     <button class="button button-outline-secondary far fa-envelope u-s-m-l-6"></button>
                                 </div>
@@ -210,10 +229,10 @@
                         <div class="detail-nav-wrapper u-s-m-b-30">
                             <ul class="nav single-product-nav justify-content-center">
                                 <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="tab" href="#description">Description</a>
+                                    <a class="nav-link active" data-toggle="tab" href="#description">Mô tả</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#specification">Specifications</a>
+                                    <a class="nav-link" data-toggle="tab" href="#specification">Thông số kỹ thuật</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#review">Reviews (15)</a>
@@ -224,10 +243,9 @@
                             <!-- Description-Tab -->
                             <div class="tab-pane fade active show" id="description">
                                 <div class="description-whole-container">
-                                    <p class="desc-p u-s-m-b-26">This hoodie is full cotton. It includes a muff sewn onto the lower front, and (usually) a drawstring to adjust the hood opening. Throughout the U.S., it is common for middle-school, high-school, and college students to wear this sweatshirts—with or without hoods—that display their respective school names or mascots across the chest, either as part of a uniform or personal preference.
+                                    <p class="desc-p u-s-m-b-26">
+                                        <?=$product_detail["description"]?>
                                     </p>
-                                    <img class="desc-img img-fluid u-s-m-b-26" src="public/images/product/product@3x.jpg" alt="Product">
-                                    <iframe class="desc-iframe u-s-m-b-45" width="710" height="400" src="public/images/product/iframe-youtube.jpg" allowfullscreen></iframe>
                                 </div>
                             </div>
                             <!-- Description-Tab /- -->
@@ -545,14 +563,15 @@
                 <section class="section-maker">
                     <div class="container">
                         <div class="sec-maker-header text-center">
-                            <h3 class="sec-maker-h3">Similar Products</h3>
+                            <h3 class="sec-maker-h3">Sản Phẩm Liên Quan</h3>
                         </div>
                         <div class="slider-fouc">
                             <div class="products-slider owl-carousel" data-item="4">
+                                <?php foreach( $similar_product as $product ) { ?>
                                 <div class="item">
                                     <div class="image-container">
-                                        <a class="item-img-wrapper-link" href="single-product.php">
-                                            <img class="img-fluid" src="public/images/product/product@3x.jpg" alt="Product">
+                                        <a class="item-img-wrapper-link" href="<?=PAGE_URL."/single-product.php?id=".$product["id"]?>">
+                                            <img class="img-fluid" src="<?=ROOT_IMAGE_URL."/product/".$product["image"]?>" alt="Product">
                                         </a>
                                         <div class="item-action-behaviors">
                                             <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look</a>
@@ -575,7 +594,7 @@
                                                 </li>
                                             </ul>
                                             <h6 class="item-title">
-                                                <a href="single-product.php">Casual Hoodie Full Cotton</a>
+                                                <a href="single-product.php"><?=$product["name"]?></a>
                                             </h6>
                                             <div class="item-stars">
                                                 <div class='star' title="0 out of 5 - based on 0 Reviews">
@@ -586,168 +605,25 @@
                                         </div>
                                         <div class="price-template">
                                             <div class="item-new-price">
-                                                $55.00
+                                                <?=number_format($product_detail["price"])?> VND
                                             </div>
-                                            <div class="item-old-price">
+                                            <!-- <div class="item-old-price">
                                                 $60.00
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
-                                    <div class="tag new">
+                                    <!-- <div class="tag new">
                                         <span>NEW</span>
-                                    </div>
+                                    </div> -->
                                 </div>
-                                <div class="item">
-                                    <div class="image-container">
-                                        <a class="item-img-wrapper-link" href="single-product.php">
-                                            <img class="img-fluid" src="public/images/product/product@3x.jpg" alt="Product">
-                                        </a>
-                                        <div class="item-action-behaviors">
-                                            <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look</a>
-                                            <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                            <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                            <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="item-content">
-                                        <div class="what-product-is">
-                                            <ul class="bread-crumb">
-                                                <li class="has-separator">
-                                                    <a href="shop-v1-root-category.php">Men's</a>
-                                                </li>
-                                                <li class="has-separator">
-                                                    <a href="shop-v2-sub-category.php">Outwear</a>
-                                                </li>
-                                                <li>
-                                                    <a href="shop-v3-sub-sub-category.php">Jackets</a>
-                                                </li>
-                                            </ul>
-                                            <h6 class="item-title">
-                                                <a href="single-product.php">Fern Green Men's Jacket</a>
-                                            </h6>
-                                            <div class="item-stars">
-                                                <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                    <span style='width:0'></span>
-                                                </div>
-                                                <span>(0)</span>
-                                            </div>
-                                        </div>
-                                        <div class="price-template">
-                                            <div class="item-new-price">
-                                                $55.00
-                                            </div>
-                                            <div class="item-old-price">
-                                                $60.00
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tag hot">
-                                        <span>HOT</span>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="image-container">
-                                        <a class="item-img-wrapper-link" href="single-product.php">
-                                            <img class="img-fluid" src="public/images/product/product@3x.jpg" alt="Product">
-                                        </a>
-                                        <div class="item-action-behaviors">
-                                            <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look</a>
-                                            <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                            <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                            <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="item-content">
-                                        <div class="what-product-is">
-                                            <ul class="bread-crumb">
-                                                <li class="has-separator">
-                                                    <a href="shop-v1-root-category.php">Men's</a>
-                                                </li>
-                                                <li class="has-separator">
-                                                    <a href="shop-v2-sub-category.php">Sunglasses</a>
-                                                </li>
-                                                <li>
-                                                    <a href="shop-v3-sub-sub-category.php">Round</a>
-                                                </li>
-                                            </ul>
-                                            <h6 class="item-title">
-                                                <a href="single-product.php">Brown Dark Tan Round Double Bridge Sunglasses</a>
-                                            </h6>
-                                            <div class="item-stars">
-                                                <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                    <span style='width:0'></span>
-                                                </div>
-                                                <span>(0)</span>
-                                            </div>
-                                        </div>
-                                        <div class="price-template">
-                                            <div class="item-new-price">
-                                                $55.00
-                                            </div>
-                                            <div class="item-old-price">
-                                                $60.00
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tag hot">
-                                        <span>HOT</span>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="image-container">
-                                        <a class="item-img-wrapper-link" href="single-product.php">
-                                            <img class="img-fluid" src="public/images/product/product@3x.jpg" alt="Product">
-                                        </a>
-                                        <div class="item-action-behaviors">
-                                            <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look</a>
-                                            <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                            <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                            <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="item-content">
-                                        <div class="what-product-is">
-                                            <ul class="bread-crumb">
-                                                <li class="has-separator">
-                                                    <a href="shop-v1-root-category.php">Men's</a>
-                                                </li>
-                                                <li class="has-separator">
-                                                    <a href="shop-v2-sub-category.php">Sunglasses</a>
-                                                </li>
-                                                <li>
-                                                    <a href="shop-v3-sub-sub-category.php">Round</a>
-                                                </li>
-                                            </ul>
-                                            <h6 class="item-title">
-                                                <a href="single-product.php">Black Round Double Bridge Sunglasses</a>
-                                            </h6>
-                                            <div class="item-stars">
-                                                <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                    <span style='width:0'></span>
-                                                </div>
-                                                <span>(0)</span>
-                                            </div>
-                                        </div>
-                                        <div class="price-template">
-                                            <div class="item-new-price">
-                                                $55.00
-                                            </div>
-                                            <div class="item-old-price">
-                                                $60.00
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tag hot">
-                                        <span>HOT</span>
-                                    </div>
-                                </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
                 </section>
                 <!-- Similar-Products /- -->
                 <!-- Recently-View-Products  -->
-                <section class="section-maker">
+                <!-- <section class="section-maker">
                     <div class="container">
                         <div class="sec-maker-header text-center">
                             <h3 class="sec-maker-h3">Recently View</h3>
@@ -805,7 +681,7 @@
                             </div>
                         </div>
                     </div>
-                </section>
+                </section> -->
                 <!-- Recently-View-Products /- -->
             </div>
             <!-- Different-Product-Section /- -->

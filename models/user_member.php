@@ -4,12 +4,13 @@ class UserMember extends User {
 
     public $active_flg = 5;
 
-    public function checkLogin( $redirect = "" ) {
+    public function checkLogin( $redirect = "", $condition = false) {
         $isLogged = false;
-        if( isset($_SESSION["isLogged"]) ) {
+        if( isset($_SESSION["isLogged"]) && $_SESSION["isLogged"] == true ) {
             $isLogged = true;
-        } 
-        else if( $redirect ) {
+        }
+
+        if( $redirect && $isLogged == $condition ) {
             header( "Location: ".$redirect );
             exit;
         }
@@ -59,7 +60,7 @@ class UserMember extends User {
 
         $check_user = parent::login( $username, $password );
         if( !$check_user ) {
-            $ret["error"] = "The username or password is incorrect!";
+            $ret["error"] = "*Username hoặc mật khẩu không đúng!";
         }
         else {
             $user_member = $this->getUserMember( $check_user["user_id"] );
@@ -75,7 +76,10 @@ class UserMember extends User {
         return $ret;
     }
 
-    public function getProfile( $user_id ) {
+    public function getProfile( $user_id = 0 ) {
+        if( !$user_id ) {
+            $user_id = $this->getUserId();
+        }
         if( !$user_id ) return array();
         $sql = "select user_id, firstname, lastname, city, district, street, phone, email, active_flg from user_members where  user_id = $user_id limit 1";
         $your_profile = parent::fetchSingle( $sql );

@@ -1,17 +1,21 @@
 <?php
 
-require "lib/func.php";
-require "models/db.php";
-require "lib/validator.php";
-require "models/user.php";
-require "models/user_member.php";
+require "../lib/config.php";
+require ROOT_LIB_PATH."/func.php";
+require ROOT_MODEL_PATH."/db.php";
+require ROOT_LIB_PATH."/validator.php";
+require ROOT_MODEL_PATH."/user.php";
+require ROOT_MODEL_PATH."/user_member.php";
 
-$error_msg = array();
+$errors = array();
 
 $username = $_POST["username"]??"";
 $password = $_POST["password"]??"";
 $confirm_password = $_POST["confirm_password"]??"";
-$term_condition = $_POST["term_condition"]??"";
+
+if( !isset($_POST["term_condition"]) ) {
+    $errors["term_condition"] = "*Vui lòng chấp nhận điều khoản và điều kiện!";
+}
 
 $input = array(
     "username" => $username,
@@ -35,7 +39,11 @@ $mo_validator = new Validator();
 $mo_validator->validate( $input, $rules );
 
 if( $mo_validator->errors ) {
-    $_SESSION["errors"] = $mo_validator->errors;
+     $errors = $errors + $mo_validator->errors;
+}
+
+if( $errors ) {
+    $_SESSION["errors"] = $errors;
     header("Location: ../account.php");
     exit;
 }

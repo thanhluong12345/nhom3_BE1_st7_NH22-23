@@ -40,6 +40,12 @@ class Cart {
         return true;
     }
 
+    public function resetCart() {
+        if( isset( $_SESSION["carts"] ) ) {
+            unset( $_SESSION["carts"] );
+        }
+    }
+
     public function getProductIdListFormCart( ) {
         $id_list = array();
         $carts = $this->getCarts();
@@ -52,8 +58,8 @@ class Cart {
     }
 
     public function getProductListInCart() {
-        require_once "models/db.php";
-        require_once "models/product.php";
+        require_once ROOT_MODEL_PATH."/db.php";
+        require_once ROOT_MODEL_PATH."/product.php";
         $mo_product = new Product();
         $total_price = 0;
         $cart_list = $this->getProductIdListFormCart();

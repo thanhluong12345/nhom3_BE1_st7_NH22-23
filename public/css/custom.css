@@ -1,0 +1,10 @@
+
+button:disabled {
+    background-color:#e78c8c;
+}
+
+p.error {
+    color: red;
+    font-size: 12px;
+    font-style: italic;
+}

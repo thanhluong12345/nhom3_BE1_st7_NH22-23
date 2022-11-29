@@ -15,7 +15,7 @@ class Validator {
                 switch( $rule ) {
                     case _IS_NULL:
                         if( trim($value) == "" )
-                        $this->errors["$field"] = "Please enter a valid $field";
+                        $this->errors["$field"] = "*Please enter a valid $field";
                         break;
                     default:
                     break;

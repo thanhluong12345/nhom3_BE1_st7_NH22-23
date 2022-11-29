@@ -1,5 +1,6 @@
 <?php
-    require "lib/func.php";
+    require "./lib/config.php";
+    require ROOT_LIB_PATH."/func.php";
 ?>
 
 <?=l_func_GetHeader("Home")?>

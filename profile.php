@@ -1,8 +1,9 @@
 <?php
-    require __DIR__."/lib/func.php";
-    require "models/db.php";
-    require "models/user.php";
-    require "models/user_member.php";
+    require "./lib/config.php";
+    require ROOT_LIB_PATH."/func.php";
+    require ROOT_MODEL_PATH."/db.php";
+    require ROOT_MODEL_PATH."/user.php";
+    require ROOT_MODEL_PATH."/user_member.php";
 
     $mo_member = new UserMember();
     $mo_member->checkLogin( "home.php" );
@@ -45,28 +46,28 @@
                                 <!-- Form-Fields -->
                                 <div class="group-inline u-s-m-b-13">
                                     <div class="group-1 u-s-p-r-16">
-                                        <label for="first-name">First Name
+                                        <label for="first-name">Họ
                                         </label>
                                         <input type="text" name="firstname" id="first-name" value="<?=$your_profile["firstname"]??""?>" class="text-field">
                                     </div>
                                     <div class="group-2">
-                                        <label for="last-name">Last Name
+                                        <label for="last-name">Tên
                                         </label>
                                         <input type="text" name="lastname" value="<?=$your_profile["lastname"]??""?>" id="last-name" class="text-field">
                                     </div>
                                 </div>
                                 <div class="u-s-m-b-13">
-                                    <label for="town-city">Town / City
+                                    <label for="town-city">Tỉnh/Thành Phố
                                     </label>
                                     <input type="text" name="city" value="<?=$your_profile["city"]??""?>" id="town-city" class="text-field">
                                 </div>
                                 <div class="u-s-m-b-13">
-                                    <label for="select-state">District 
+                                    <label for="select-state">Quận/Huyện 
                                     </label>
                                     <input type="text" name="district" value="<?=$your_profile["district"]??""?>" id="req-st-district" class="text-field" placeholder="">
                                 </div>
                                 <div class="street-address u-s-m-b-13">
-                                    <label for="req-st-address">Street Address
+                                    <label for="req-st-address">Xã/Phường + Địa chỉ số nhà
                                     </label>
                                     <input type="text" name="street" value="<?=$your_profile["street"]??""?>" id="req-st-address" class="text-field" placeholder="House name and street name">
                                 </div>
@@ -80,19 +81,19 @@
                                 </div> -->
                                 <div class="group-inline u-s-m-b-13">
                                     <div class="group-1 u-s-p-r-16">
-                                        <label for="email">Email address
+                                        <label for="email">Email
                                         </label>
                                         <input type="text" name="email" value="<?=$your_profile["email"]??""?>" id="email" class="text-field">
                                     </div>
                                     <div class="group-2">
-                                        <label for="phone">Phone
+                                        <label for="phone">Số điện thoại
                                         </label>
                                         <input type="text" name="phone" id="phone" value="<?=$your_profile["phone"]??""?>" class="text-field">
                                     </div>
                                 </div>
                                
                                 <div class="pt-3 mb-3"> 
-                                    <button type="submit" class="button button-outline-secondary checkout-anchor">Update</button>
+                                    <button type="submit" class="button button-outline-secondary checkout-anchor">Cập nhật profile</button>
                                 </div>
                             </div>
                         </div>

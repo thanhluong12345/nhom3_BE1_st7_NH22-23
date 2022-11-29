@@ -1,9 +1,10 @@
 <?php
 
-require __DIR__."/../lib/func.php";
-require __DIR__."/../models/db.php";
-require __DIR__."/../models/user.php";
-require __DIR__."/../models/user_member.php";
+require "../lib/config.php";
+require ROOT_LIB_PATH."/func.php";
+require ROOT_MODEL_PATH."/db.php";
+require ROOT_MODEL_PATH."/user.php";
+require ROOT_MODEL_PATH."/user_member.php";
 
 $mo_member = new UserMember();
 $mo_member->checkLogin("home.php");

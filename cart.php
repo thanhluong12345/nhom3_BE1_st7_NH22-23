@@ -1,10 +1,11 @@
 <?php
     
-    require "lib/func.php";
-    require "./lib/cart.php";
+    require "./lib/config.php";
+    require ROOT_LIB_PATH."/func.php";
+    require ROOT_LIB_PATH."/cart.php";
 
     $mo_cart = new Cart();
-    $product_list = $mo_cart->getProductListInCart();
+    $cart_list = $mo_cart->getProductListInCart();
 ?>
 
 <?php
@@ -37,7 +38,9 @@
             <div class="row">
                 <div class="col-lg-12">
                         <!-- Products-List-Wrapper -->
+                        
                         <div class="table-wrapper u-s-m-b-60">
+                            <?php if( !empty($cart_list["products"]) ) { ?>
                             <table>
                                 <thead>
                                     <tr>
@@ -48,19 +51,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach( $product_list["products"] as $product ) { ?>
+                                    <?php foreach( $cart_list["products"] as $product ) { ?>
                                     <tr>
                                         <td>
                                             <div class="cart-anchor-image">
                                                 <a href="single-product.php">
-                                                    <img src="public/images/product/product@1x.jpg" alt="Product">
+                                                    <img src="<?=ROOT_IMAGE_URL."/product/".$product["image"]?>" alt="Product">
                                                     <h6> <?=$product["name"]?> </h6>
                                                 </a>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="cart-price">
-                                                <?= number_format($product_list["total_price"]) ?> VND
+                                                <?= number_format($cart_list["total_price"]) ?> VND
                                             </div>
                                         </td>
                                         <td>
@@ -83,7 +86,15 @@
                                     <?php } ?>
                                 </tbody>
                             </table>
+                            <?php } else { ?>
+                                <div class="text-center redirect-link-wrapper u-s-p-b-25">
+                                    <a class="redirect-link" href="<?=PAGE_URL."/category.php"?>">
+                                        <span>Không có sản phẩm nào trong giỏ hàng, tiếp tục mua sắm!</span>
+                                    </a>
+                                </div>
+                            <?php } ?>
                         </div>
+                        
                         <!-- Products-List-Wrapper /- -->
                         <!-- Coupon -->
                         <div class="coupon-continue-checkout u-s-m-b-60">
@@ -96,7 +107,7 @@
                                 </div>
                             </div> -->
                             <div class="button-area">
-                                <a href="shop-v1-root-category.php" class="continue">Continue Shopping</a>
+                                <a href="<?=PAGE_URL."/category.php"?>" class="continue">Continue Shopping</a>
                                 <a href="checkout.php" class="checkout">Proceed to Checkout</a>
                             </div>
                         </div>
@@ -185,7 +196,7 @@
                                             <h3 class="calc-h3 u-s-m-b-0">Total</h3>
                                         </td>
                                         <td>
-                                            <span class="calc-text"><?=number_format($product_list["total_price"])?> <b>VND</b></span>
+                                            <span class="calc-text"><?=number_format($cart_list["total_price"])?> <b>VND</b></span>
                                         </td>
                                     </tr>
                                 </tbody>
