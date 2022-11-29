@@ -11,7 +11,7 @@
               <div class="card">
                 <div class="card-header card-header-primary">
                   <h4 class="card-title ">Protypes</h4> 
-                  <a href="" class="btn btn-fab btn-just-icon btn-white"> <i class="fa-2x text-primary fa fa-plus-square" aria-hidden="true"></i> </a>
+                  <a href="<?=ROOT_ADMIN_URL."/pages/protypes/edit.php"?>" class="btn btn-fab btn-just-icon btn-white"> <i class="fa-2x text-primary fa fa-plus-square" aria-hidden="true"></i> </a>
                   <!-- <p class="card-category"> Here is a subtitle for this table</p> -->
                 </div>
                 <div class="card-body">
@@ -55,7 +55,7 @@
                             $36,738
                           </td>
                           <td>
-                            <a href="<?=ROOT_ADMIN_URL."/pages/protypes/edit.php"?>" class="btn btn-primary btn-round">
+                            <a href="<?=ROOT_ADMIN_URL."/pages/protypes/edit.php?id="?>" class="btn btn-primary btn-round">
                               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </a>
                             <a href="<?=ROOT_ADMIN_URL."/pages/protypes/delete.php"?>" class="btn btn-primary btn-round">
