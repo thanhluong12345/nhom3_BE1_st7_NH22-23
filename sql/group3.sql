@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2022 at 01:22 AM
+-- Generation Time: Nov 29, 2022 at 04:22 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -53,8 +53,16 @@ CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `ship_address` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `order_notes` text COLLATE utf8_unicode_ci DEFAULT NULL,
   `order_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `user_id`, `ship_address`, `order_notes`, `order_date`) VALUES
+(12, 1, 'ninh thuận,phước thuận, ninh phước,vạn phước', '', '2022-11-28 01:41:42');
 
 -- --------------------------------------------------------
 
@@ -63,11 +71,21 @@ CREATE TABLE `orders` (
 --
 
 CREATE TABLE `order_details` (
+  `id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `unit_price` float NOT NULL,
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `unit_price`, `quantity`) VALUES
+(10, 12, 16, 3990000, 1),
+(11, 12, 14, 2200000, 2),
+(12, 12, 5, 28490000, 1);
 
 -- --------------------------------------------------------
 
@@ -121,21 +139,23 @@ INSERT INTO `products` (`id`, `name`, `manu_id`, `type_id`, `price`, `image`, `d
 
 CREATE TABLE `protypes` (
   `type_id` tinyint(3) NOT NULL,
-  `type_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+  `type_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `display_home` tinyint(1) NOT NULL DEFAULT 0,
+  `pos` tinyint(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `protypes`
 --
 
-INSERT INTO `protypes` (`type_id`, `type_name`) VALUES
-(1, 'Điện thoại'),
-(2, 'Laptop'),
-(3, 'Máy tính bảng'),
-(4, 'Bàn phím'),
-(5, 'Chuột'),
-(6, 'USB'),
-(7, 'Tai nghe');
+INSERT INTO `protypes` (`type_id`, `type_name`, `display_home`, `pos`) VALUES
+(1, 'Điện thoại', 1, 1),
+(2, 'Laptop', 1, 2),
+(3, 'Máy tính bảng', 1, 3),
+(4, 'Bàn phím', 0, 6),
+(5, 'Chuột', 1, 7),
+(6, 'USB', 0, 4),
+(7, 'Tai nghe', 0, 5);
 
 -- --------------------------------------------------------
 
@@ -201,7 +221,7 @@ CREATE TABLE `user_members` (
 --
 
 INSERT INTO `user_members` (`user_id`, `firstname`, `lastname`, `city`, `district`, `street`, `phone`, `email`, `created_at`, `updated_at`, `last_login`, `active_flg`) VALUES
-(1, 'thành', 'lương', 'ninh thuận', 'phước thuận, ninh phước', 'vạn phước', 93874578, 'luong.nt1999@gmail.com', '0000-00-00 00:00:00', NULL, NULL, 2);
+(1, 'Nguyễn Thành', 'Lương', 'ninh thuận', 'phước thuận, ninh phước', 'vạn phước', 93874578, 'luong.nt1999@gmail.com', '0000-00-00 00:00:00', NULL, NULL, 2);
 
 --
 -- Indexes for dumped tables
@@ -224,6 +244,7 @@ ALTER TABLE `orders`
 -- Indexes for table `order_details`
 --
 ALTER TABLE `order_details`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `order_id` (`order_id`),
   ADD KEY `product_id` (`product_id`);
 
@@ -275,7 +296,13 @@ ALTER TABLE `manufactures`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `order_details`
+--
+ALTER TABLE `order_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `products`
