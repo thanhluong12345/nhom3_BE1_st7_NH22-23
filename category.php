@@ -90,7 +90,7 @@
                         <ul>
                             <?php foreach( $protype_all as $type ) { ?>
                             <li>
-                                <a href="<?=PAGE_URL."/category.php?type_id=".$type["type_id"].((!$type_id&&$param)?"&".$param:"")?>"><?=$type["type_name"]?>
+                                <a href="<?=PAGE_URL."/category.php?type_id=".$id["id"].((!$id&&$param)?"&".$param:"")?>"><?=$type["type_name"]?>
                                     <span class="total-fetch-items">(2)</span>
                                 </a>
                             </li>

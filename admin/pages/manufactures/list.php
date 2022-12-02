@@ -1,5 +1,21 @@
 <?php 
   require_once "../../../lib/config.php";
+  require ROOT_MODEL_PATH."/db.php";
+  require ROOT_MODEL_PATH."/user.php";
+  require ROOT_MODEL_PATH."/user_member.php";
+  require ROOT_MODEL_PATH."/protype.php";
+  require ROOT_MODEL_PATH."/product.php";
+  require ROOT_LIB_PATH."/cart.php";
+  require ROOT_MODEL_PATH."./manufacture.php";
+  $mo_cart = new Cart();
+    $mo_member = new UserMember();
+    $mo_protype = new Protype();
+    $producttest = new Product();
+    $manufactures = new Manufacture();
+    $product_list = $mo_cart->getProductListInCart();
+    $protype_list = $mo_protype->getAllprotypes();
+    $product_list = $producttest->getProductAll();
+    $manufactures_list = $manufactures->getManufacture();
 ?>
 
 <?php require ROOT_ADMIN."/components/header.php"; ?>
@@ -18,7 +34,7 @@
                   <div class="table-responsive">
                     <table class="table">
                       <thead class=" text-primary">
-                        <th>
+                      <th>
                           ID
                         </th>
                         <th>
@@ -39,21 +55,16 @@
                       </thead>
                       <tbody>
                         <tr>
+                        <?php
+                          foreach($manufactures_list as $value):
+                          ?>
                           <td>
-                            1
+                            <?php echo $value['manu_id']
+                            ?>
                           </td>
-                          <td>
-                            Dakota Rice
-                          </td>
-                          <td>
-                            Niger
-                          </td>
-                          <td>
-                            Oud-Turnhout
-                          </td>
-                          <td class="text-primary">
-                            $36,738
-                          </td>
+                          <?php
+                          endforeach
+                          ?>
                           <td>
                             <a href="<?=ROOT_ADMIN_URL."/pages/manufactures/edit.php?id="?>" class="btn btn-primary btn-round">
                               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
