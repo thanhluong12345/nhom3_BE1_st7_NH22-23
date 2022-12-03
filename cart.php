@@ -36,9 +36,8 @@
     <div class="page-cart u-s-p-t-80">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12 cart-list-main">
                         <!-- Products-List-Wrapper -->
-                        
                         <div class="table-wrapper u-s-m-b-60">
                             <?php if( !empty($cart_list["products"]) ) { ?>
                             <table>
@@ -63,7 +62,7 @@
                                         </td>
                                         <td>
                                             <div class="cart-price">
-                                                <?= number_format($cart_list["total_price"]) ?> VND
+                                                <?= number_format($product["price_cart"]) ?> VND
                                             </div>
                                         </td>
                                         <td>
@@ -196,7 +195,7 @@
                                             <h3 class="calc-h3 u-s-m-b-0">Total</h3>
                                         </td>
                                         <td>
-                                            <span class="calc-text"><?=number_format($cart_list["total_price"])?> <b>VND</b></span>
+                                            <span class="calc-text"><?=number_format($cart_list["total_price"])?> <b> VND</b></span>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -208,10 +207,4 @@
             </div>
         </div>
     </div>
-
-    <?php 
-        $script = 
-        "<script type=\"text/javascript\" src=\"public/js/custom/cart.js\"></script>";
-    ?>
-
-    <?=l_func_getFooter( $script )?>
+    <?=l_func_getFooter( )?>

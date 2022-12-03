@@ -44,12 +44,12 @@ if( $mo_validator->errors ) {
 
 if( $errors ) {
     $_SESSION["errors"] = $errors;
-    header("Location: ../account.php");
+    header("Location: ".PAGE_URL."/account.php");
     exit;
 }
 
 if(strcmp( $password, $confirm_password )) {
-    header("Location: ../account.php");
+    header("Location: ".PAGE_URL."/account.php");
     exit;
 }
 
@@ -60,15 +60,17 @@ $user_res = $mo_user->register( $username, $password );
 
 if( !$user_res["status"] ) {
     $_SESSION["errors"]["error_common"] = $user_res["error"];
-    header("Location: ../account.php");
+    header("Location: ".PAGE_URL."/account.php");
     exit;
 }
 
 $member_res = $mo_member->registerMember( $user_res["user_id"] );
 if( !$member_res ) {
     $_SESSION["errors"]["error_common"] = $user_res["error"];
-    header("Location: ../account.php");
+    header("Location: ".PAGE_URL."/account.php");
     exit;
 }
 
+header("Location: ".PAGE_URL."/home.php");
+exit;
 

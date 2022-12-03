@@ -1,4 +1,12 @@
 <?php
+  session_start();
+  require_once $_SERVER["DOCUMENT_ROOT"]."/nhom3_BE1_st7_NH22-23/lib/config.php";
+  require ROOT_MODEL_PATH."/db.php";
+  require ROOT_MODEL_PATH."/user.php";
+  require ROOT_ADMIN."/models/user_admin.php";
+  $mo_admin = new UserAdmin();
+  $mo_admin->checkLogin( ROOT_ADMIN_URL."/login.php", false);
+
   require_once ROOT_ADMIN."/lib/func.php";
   $sidebars = array(
     "dashboard" => array(
@@ -260,7 +268,7 @@
                   <a class="dropdown-item" href="#">Profile</a>
                   <a class="dropdown-item" href="#">Settings</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Log out</a>
+                  <a class="dropdown-item" href="<?=ROOT_ADMIN_URL."/logout.php"?>">Log out</a>
                 </div>
               </li>
             </ul>

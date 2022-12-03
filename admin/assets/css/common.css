@@ -103,4 +103,13 @@ body, h1,h2,h3,h4,h5,h6{
 .sidebar[data-color="purple"] li.bg-custom.active>a i {
     color: #a9afbb;
 }
+
+p.error {
+    color: red;
+    font-size: 12px;
+    font-style: italic;
+    margin-top: -10px;
+    padding-bottom: 10px;
+    padding-left:20px;
+}
 /*end custom scrollbar */

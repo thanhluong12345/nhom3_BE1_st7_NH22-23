@@ -425,8 +425,11 @@
     <script type='text/javascript' src='public/js/jquery.custom-countdown.min.js'></script>
     <!-- Owl Carousel -->
     <script type='text/javascript' src='public/js/owl.carousel.min.js'></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Main -->
     <script type='text/javascript' src='public/js/app.js'></script>
+    <script type='text/javascript' src='public/js/custom/common.js'></script>
+    <script type='text/javascript' src='public/js/custom/cart.js'></script>
     <?=$script?>
     </body>
     </html>

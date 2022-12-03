@@ -203,6 +203,14 @@
                                                 </td>
                                             </tr>
                                             <?php } ?>
+                                            <tr>
+                                                <td>
+                                                    <b> Total: </b>
+                                                </td>
+                                                <td>
+                                                    <b class="calc-text"><?=number_format($cart_list["total_price"])?></b>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                     <?php if( empty($cart_list["products"]) ) { ?>

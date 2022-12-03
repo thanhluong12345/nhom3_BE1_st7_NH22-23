@@ -1,5 +1,5 @@
 <?php
-    require_once ROOT_LIB_PATH."/config.php";
+    require_once $_SERVER["DOCUMENT_ROOT"]."/nhom3_BE1_st7_NH22-23/lib/config.php";
     require_once ROOT_LIB_PATH."/func.php";
     require_once ROOT_LIB_PATH."/cart.php";
     require_once ROOT_MODEL_PATH."/db.php";
@@ -12,7 +12,7 @@
     $mo_protype = new Protype();
     $mo_manufac = new Manufacture();
 
-    $product_list = $mo_cart->getProductListInCart();
+    $cart_list = $mo_cart->getProductListInCart();
     $protype_list = $mo_protype->getProtypeLimit();
 
     $user_id = $mo_member->getUserId();
@@ -102,7 +102,7 @@
                                             My Cart</a>
                                     </li>
                                     <li>
-                                        <a href="checkout.php">
+                                        <a href="<?=PAGE_URL."/checkout.php"?>">
                                             <i class="far fa-check-circle u-s-m-r-9"></i>
                                             Checkout</a>
                                     </li>
@@ -134,7 +134,7 @@
                                     </li>
                                 </ul>
                             </li> -->
-                            <li>
+                            <!-- <li>
                                 <a>ENG
                                     <i class="fas fa-chevron-down u-s-m-l-9"></i>
                                 </a>
@@ -145,7 +145,7 @@
                                     <li>
                                         <a href="#">ARB</a>
                                     </li>
-                                </ul>
+                                </ul> -->
                         </ul>
                     </nav>
                 </div>
@@ -203,15 +203,15 @@
                                         </a>
                                     </li>
                                     <li class="u-d-none-lg">
-                                        <a href="wishlist.php">
+                                        <a href="<?=PAGE_URL."/wishlist.php"?>">
                                             <i class="far fa-heart"></i>
                                         </a>
                                     </li>
                                     <li>
                                         <a id="mini-cart-trigger">
                                             <i class="ion ion-md-basket"></i>
-                                            <span class="item-counter"><?= $product_list["number"]?></span>
-                                            <span class="item-price"><?= number_format($product_list["total_price"])." VND" ?></span>
+                                            <span class="item-counter"><?= $cart_list["number"]?></span>
+                                            <span class="item-price" style="font-size:13px; white-space: nowrap;"><?= number_format($cart_list["total_price"])." VND" ?></span>
                                         </a>
                                     </li>
                                 </ul>
@@ -227,7 +227,7 @@
                     <button type="button" class="button fas fa-search" id="responsive-search"></button>
                 </div>
                 <div class="fixed-responsive-wrapper">
-                    <a href="wishlist.php">
+                    <a href="<?=PAGE_URL."/wishlist.php"?>">
                         <i class="far fa-heart"></i>
                         <span class="fixed-item-counter">4</span>
                     </a>
@@ -235,18 +235,18 @@
             </div>
             <!-- Responsive-Buttons /- -->
             <!-- Mini Cart -->
-            <div class="mini-cart-wrapper">
+            <div class="mini-cart-wrapper" id="mini-cart-wrapper-popup">
                 <div class="mini-cart">
                     <div class="mini-cart-header">
                         YOUR CART
                         <button type="button" class="button ion ion-md-close" id="mini-cart-close"></button>
                     </div>
                     <ul class="mini-cart-list">
-                        <?php foreach( $product_list["products"] as $product ) { ?>
+                        <?php foreach( $cart_list["products"] as $product ) { ?>
                         <li class="clearfix">
-                            <a href="single-product.php">
+                            <a href="<?=PAGE_URL."/single-product.php?id=".$product["id"]?>">
                                 <img src="public/images/product/<?=$product["image"]?>" alt="<?=$product["name"]?>">
-                                <span class="mini-item-name"><?=$product["name"]?></span>
+                                <span class="mini-item-name"><?=substr($product["name"], 0, 50)?>...</span>
                                 <span class="mini-item-price"><?=number_format($product["price_cart"])?></span>
                                 <span class="mini-item-quantity"> x <?=$product["num_cart"]?> </span>
                             </a>
@@ -255,11 +255,11 @@
                     </ul>
                     <div class="mini-shop-total clearfix">
                         <span class="mini-total-heading float-left">Total:</span>
-                        <span class="mini-total-price float-right"><?= number_format($product_list["total_price"])." VND" ?></span>
+                        <span class="mini-total-price float-right"><?= number_format($cart_list["total_price"])." VND" ?></span>
                     </div>
                     <div class="mini-action-anchors">
-                        <a href="cart.php" class="cart-anchor">View Cart</a>
-                        <a href="checkout.php" class="checkout-anchor">Checkout</a>
+                        <a href="<?=PAGE_URL."/cart.php"?>" class="cart-anchor">View Cart</a>
+                        <a href="<?=PAGE_URL."/checkout.php"?>" class="checkout-anchor">Checkout</a>
                     </div>
                 </div>
             </div>
@@ -278,149 +278,6 @@
                                 <nav>
                                     <div class="v-wrapper">
                                         <ul class="v-list animated fadeIn">
-                                            <!-- <li class="js-backdrop">
-                                                <a href="shop-v1-root-category.php">
-                                                    <i class="ion ion-md-shirt"></i>
-                                                    Men"s Clothing
-                                                    <i class="ion ion-ios-arrow-forward"></i>
-                                                </a>
-                                                <button class="v-button ion ion-md-add"></button>
-                                                <div class="v-drop-right" style="width: 700px;">
-                                                    <div class="row">
-                                                        <div class="col-lg-4">
-                                                            <ul class="v-level-2">
-                                                                <li>
-                                                                    <a href="shop-v2-sub-category.php">Tops</a>
-                                                                    <ul>
-                                                                        <li>
-                                                                            <a href="shop-v3-sub-sub-category.php">T-Shirts</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="shop-v3-sub-sub-category.php">Hoodies</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="shop-v3-sub-sub-category.php">Suits</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="shop-v4-filter-as-category.php">Black Bean T-Shirt
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <ul class="v-level-2">
-                                                                <li>
-                                                                    <a href="shop-v2-sub-category.php">Outwear</a>
-                                                                    <ul>
-                                                                        <li>
-                                                                            <a href="shop-v3-sub-sub-category.php">Jackets</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="shop-v3-sub-sub-category.php">Trench</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="shop-v3-sub-sub-category.php">Parkas</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="shop-v3-sub-sub-category.php">Sweaters</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <ul class="v-level-2">
-                                                                <li>
-                                                                    <a href="shop-v1-root-category.php">Accessories</a>
-                                                                    <ul>
-                                                                        <li>
-                                                                            <a href="shop-v3-sub-sub-category.php">Watches</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="shop-v3-sub-sub-category.php">Ties</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="shop-v3-sub-sub-category.php">Scarves</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="shop-v3-sub-sub-category.php">Belts</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-lg-4">
-                                                            <ul class="v-level-2">
-                                                                <li>
-                                                                    <a href="shop-v2-sub-category.php">Bottoms</a>
-                                                                    <ul>
-                                                                        <li>
-                                                                            <a href="shop-v3-sub-sub-category.php">Casual Pants
-                                                                            </a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="shop-v3-sub-sub-category.php">Shoes</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="shop-v3-sub-sub-category.php">Jeans</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="shop-v3-sub-sub-category.php">Shorts</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <ul class="v-level-2">
-                                                                <li>
-                                                                    <a href="shop-v2-sub-category.php">Underwear</a>
-                                                                    <ul>
-                                                                        <li>
-                                                                            <a href="shop-v3-sub-sub-category.php">Boxers</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="shop-v3-sub-sub-category.php">Briefs</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="shop-v3-sub-sub-category.php">Robes</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="shop-v3-sub-sub-category.php">Socks</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <ul class="v-level-2">
-                                                                <li>
-                                                                    <a href="shop-v2-sub-category.php">Sunglasses</a>
-                                                                    <ul>
-                                                                        <li>
-                                                                            <a href="shop-v3-sub-sub-category.php">Pilot</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="shop-v3-sub-sub-category.php">Wayfarer</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="shop-v3-sub-sub-category.php">Square</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="shop-v3-sub-sub-category.php">Round</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li> -->
-                                            
                                             <?php foreach( $protype_list as $val ) { ?>
                                             <li>
                                                 <a href="<?=PAGE_URL."/category.php?type_id=".$val["type_id"]?>" title="<?=$val["type_name"]?>" class="v-more">
@@ -444,15 +301,6 @@
                                     </a>
                                 </li>
                                 <?php } ?>
-                                <!-- <li>
-                                    <a href="custom-deal-page.php">Exclusive Deals
-                                        <span class="superscript-label-hot">HOT</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="custom-deal-page.php">Flash Deals
-                                    </a>
-                                </li> -->
                                 <li class="mega-position">
                                     <a>Pages
                                         <i class="fas fa-chevron-down u-s-m-l-9"></i>

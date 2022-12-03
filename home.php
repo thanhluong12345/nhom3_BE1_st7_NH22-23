@@ -42,9 +42,7 @@
     <div class="banner-layer">
         <div class="container">
             <div class="image-banner">
-                <a href="shop-v1-root-category.php" class="mx-auto banner-hover effect-dark-opacity">
-                    <img class="img-fluid" src="<?=ROOT_IMAGE_URL."/banners/home_banner1.jpg"?>" alt="Winter Season Banner">
-                </a>
+            <img class="img-fluid" src="<?=ROOT_IMAGE_URL."/banners/home_banner1.jpg"?>" alt="Winter Season Banner">
             </div>
         </div>
     </div>
@@ -82,9 +80,9 @@
                                             <div class="item-action-behaviors">
                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look
                                                 </a>
-                                                <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
+                                                <!-- <a class="item-mail" href="javascript:void(0)">Mail</a> -->
+                                                <a class="item-addwishlist" href="javascript:void(0)" onClick="addWishlist(<?=$product["id"]?>)" >Add to Wishlist</a>
+                                                <a class="item-addCart" href="javascript:void(0)" onclick="addToCart(<?=$product['id']?>)" >Add to Cart</a>
                                             </div>
                                         </div>
                                         <div class="item-content">
@@ -154,9 +152,9 @@
                                             <div class="item-action-behaviors">
                                                 <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look
                                                 </a>
-                                                <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                                <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                                <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
+                                                <!-- <a class="item-mail" href="javascript:void(0)">Mail</a> -->
+                                                <a class="item-addwishlist" href="javascript:void(0)" onClick="addWishlist(<?=$product["id"]?>)" >Add to Wishlist</a>
+                                                <a class="item-addCart" href="javascript:void(0)" onclick="addToCart(<?=$product['id']?>)" >Add to Cart</a>
                                             </div>
                                         </div>
                                         <div class="item-content">
@@ -218,13 +216,12 @@
     </section>
     <?php } ?>
     <!-- Men-Clothing-Timing-Section -->
-    <section class="section-maker">
+    <!-- <section class="section-maker">
         <div class="container">
             <div class="sec-maker-header text-center">
                 <span class="sec-maker-span-text">Men's Clothing</span>
                 <h3 class="sec-maker-h3 u-s-m-b-22">Hot Deals</h3>
                 <span class="sec-maker-span-text">Ends in</span>
-                <!-- Timing-Box -->
                 <div class="section-timing-wrapper dynamic">
                     <span class="fictitious-seconds" style="display:none;">18000</span>
                     <div class="section-box-wrapper box-days">
@@ -252,9 +249,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Timing-Box /- -->
             </div>
-            <!-- Carousel -->
             <div class="slider-fouc">
                 <div class="products-slider owl-carousel" data-item="4">
                     <div class="item">
@@ -451,15 +446,14 @@
                     </div>
                 </div>
             </div>
-            <!-- Carousel /- -->
         </div>
-    </section>
+    </section> -->
     <!-- Men-Clothing-Timing-Section /- -->
     <!-- Banner-Image & View-more -->
     <div class="banner-image-view-more">
         <div class="container">
             <div class="image-banner u-s-m-y-40">
-                <a href="shop-v1-root-category.php" class="mx-auto banner-hover effect-dark-opacity">
+                <a href="<?=PAGE_URL."/category.php"?>" class="mx-auto banner-hover effect-dark-opacity">
                     <img class="img-fluid" src="<?=ROOT_IMAGE_URL."/banners/home_banner2.jpg"?>" alt="Banner Image">
                 </a>
             </div>
@@ -479,7 +473,7 @@
     </div>
     <!-- Continue-Link /- -->
     <!-- Brand-Slider -->
-    <div class="brand-slider u-s-p-b-80">
+    <!-- <div class="brand-slider u-s-p-b-80">
         <div class="container">
             <div class="brand-slider-content owl-carousel" data-item="5">
                 <div class="brand-pic">
@@ -514,7 +508,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Brand-Slider /- -->
     <!-- Site-Priorities -->
     <section class="app-priority">

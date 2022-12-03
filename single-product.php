@@ -78,7 +78,7 @@
                         <div class="section-1-title-breadcrumb-rating">
                             <div class="product-title">
                                 <h1>
-                                    <a href="single-product.php"><?=$product_detail["name"]?></a>
+                                    <a href="<?=PAGE_URL."/single-product.php?id=".$product_detail["id"]?>"><?=$product_detail["name"]?></a>
                                 </h1>
                             </div>
                             <ul class="bread-crumb">
@@ -212,7 +212,7 @@
                                 </div>
                                 <div>
                                     <input type="hidden" name="product_id" value="1"/>
-                                    <input class="button button-outline-secondary" onclick="addToCart(<?=$product_detail['id']?>,'single-product.php')" name="add" type="submit" value="Thêm vào giỏ hàng" />
+                                    <input class="button button-outline-secondary" onclick="addToCart(<?=$product_detail['id']?>)" name="add" type="submit" value="Thêm vào giỏ hàng" />
                                     <button class="button button-outline-secondary far fa-heart u-s-m-l-6"></button>
                                     <button class="button button-outline-secondary far fa-envelope u-s-m-l-6"></button>
                                 </div>
@@ -575,9 +575,9 @@
                                         </a>
                                         <div class="item-action-behaviors">
                                             <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look</a>
-                                            <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                            <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                            <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
+                                            <!-- <a class="item-mail" href="javascript:void(0)">Mail</a> -->
+                                            <a class="item-addwishlist" href="javascript:void(0)" onClick="addWishlist(<?=$product["id"]?>)" >Add to Wishlist</a>
+                                            <a class="item-addCart" href="javascript:void(0)" onclick="addToCart(<?=$product['id']?>)" >Add to Cart</a>
                                         </div>
                                     </div>
                                     <div class="item-content">
@@ -687,11 +687,6 @@
             <!-- Different-Product-Section /- -->
         </div>
     </div>
-
-    <?php 
-        $script = 
-        "<script type=\"text/javascript\" src=\"public/js/custom/cart.js\"></script>";
-    ?>
-    <?=l_func_getFooter( $script )?>
+    <?=l_func_getFooter()?>
 
 

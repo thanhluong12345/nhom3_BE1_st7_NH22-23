@@ -37,15 +37,9 @@ class UserMember extends User {
         }
     }
 
-    public function getUserMember( $user_id = 0, $username = "" ) {
-        if( !$user_id && !$username ) return false;
-        $where = "";
-        if( $user_id ) {
-            $where = " user_id = $user_id ";
-        }
-        else{
-            $where = " username = '".$username."' ";
-        }
+    public function getUserMember( $user_id = 0 ) {
+        if( !$user_id ) return array();
+        $where = " user_id = $user_id ";
         $sql = "select * from user_members where $where limit 1";
         $user_current = parent::fetchSingle( $sql );
         if( !$user_current ) return array();
