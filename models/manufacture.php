@@ -23,7 +23,7 @@ class Manufacture extends Db
     public function getManufacture()
     {
         $sql = "select * from manufactures";
-        $ret = parent::fetchSingle($sql);
+        $ret = parent::fetchArray($sql);
         return $ret;
     }
 }
