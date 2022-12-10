@@ -1,5 +1,24 @@
 <?php 
   require_once "../../../lib/config.php";
+  require ROOT_MODEL_PATH."/db.php";
+  require ROOT_MODEL_PATH."/protype.php";
+
+
+
+  $action_url = ROOT_ADMIN_URL."/pages/protypes/create.php";
+
+  if(isset($_GET["type_id"])){
+    $mo_protype = new Protype();
+    $type_id=$_GET["type_id"];
+    $protype = $mo_protype->getProtypeById($type_id);
+
+
+    //khi có type id sẽ là url update
+    $action_url = ROOT_ADMIN_URL."/pages/protypes/update.php?type_id=".$type_id;
+  }
+
+  //giờ em qua file protypes/create.php => code để xử lý tạo và protypes/update.php để xử lý update
+  
 ?>
 
 <?php require ROOT_ADMIN."/components/header.php"; ?>
@@ -14,81 +33,26 @@
                   <p class="card-category">Complete your profile</p>
                 </div>
                 <div class="card-body">
-                  <form>
-                    <div class="row">
-                      <div class="col-md-5">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Company (disabled)</label>
-                          <input type="text" class="form-control" disabled>
-                        </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Username</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Email address</label>
-                          <input type="email" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Fist Name</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Last Name</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
+                  <form action="<?=$action_url?>" method="POST" >
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Adress</label>
-                          <input type="text" class="form-control">
+                          <label class="bmd-label-floating">Type id</label>
+                          <input type="text" name ="type_id" value="<?=$protype["type_id"]??""?>" class="form-control" disabled>
                         </div>
                       </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">City</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Country</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Postal Code</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label>About Me</label>
-                          <div class="form-group">
-                            <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
-                            <textarea class="form-control" rows="5"></textarea>
-                          </div>
+                          <label class="bmd-label-floating">Type name</label>
+                          <input type="text" name ="type_name" value="<?=$protype["type_name"]??""?>" class="form-control">
                         </div>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary pull-right">Update Profile</button>
+                    <?php if( isset( $_GET["type_id"] ) ) { ?>
+                    <button type="submit" name="update" class="btn btn-primary pull-right">Update</button>
+                    <?php } else { ?>
+                      <button type="submit" name="create" class="btn btn-primary pull-right">Create</button>
+                    <?php } ?>
                     <div class="clearfix"></div>
                   </form>
                 </div>

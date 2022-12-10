@@ -20,4 +20,16 @@ class Protype extends Db {
         $ret = parent::fetchSingle( $sql );
         return $ret;
     }
+    // get all data
+    public function getProtypeByAllId() {
+        $sql = "select * from protypes";
+        $ret = parent::fetchArray( $sql );
+        return $ret;
+    }
+    public function deleteProtypeById( $type_id ) {
+        $sql = "delete  from protypes where type_id = $type_id";
+        $ret = parent::fetchSingle( $sql );
+        return $ret;
+    }
+ 
 }
