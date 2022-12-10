@@ -54,13 +54,16 @@
                         </th>
                       </thead>
                       <tbody>
-                        <tr>
-                        <?php
+                         <?php
                           foreach($manufactures_list as $value):
                           ?>
+                        <tr>
                           <td>
                             <?php echo $value['manu_id']
                             ?>
+                          </td>
+                          <td>
+                            <?php echo $value['manu_name'] ?>
                           </td>
                           <?php
                           endforeach
