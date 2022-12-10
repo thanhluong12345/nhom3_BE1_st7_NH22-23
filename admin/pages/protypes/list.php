@@ -9,7 +9,7 @@ $_SESSION["type_id"] = 'type_id';
 
 
 ?>
-
+ 
 <?php require ROOT_ADMIN."/components/header.php"; ?>
       <!-- End Navbar -->
       <div class="content">
@@ -54,7 +54,7 @@ $_SESSION["type_id"] = 'type_id';
                             <a href="<?=ROOT_ADMIN_URL."/pages/protypes/edit.php?type_id=$type[type_id]"?>" class="btn btn-primary btn-round">
                               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </a>
-                            <a href="<?=ROOT_ADMIN_URL."/pages/protypes/delete.php?type_id=$type[type_id]"?>" class="btn btn-primary btn-round">
+                            <a href="<?=ROOT_ADMIN_URL."/pages/protypes/delete.php?type_name=$type[type_name]"?>" class="btn btn-primary btn-round">
                               <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
                           </td>
@@ -70,5 +70,8 @@ $_SESSION["type_id"] = 'type_id';
           </div>
         </div>
       </div>
-      
+      <?php
+      if (isset($_GET["error_flg"])){ ?>
+      <script>Swal.fire('Sản phẩm đang được liên kết!!')</script>
+      <?php } ?>
 <?php require ROOT_ADMIN."/components/footer.php"; ?>

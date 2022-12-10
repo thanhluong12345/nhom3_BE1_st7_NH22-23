@@ -26,9 +26,24 @@ class Protype extends Db {
         $ret = parent::fetchArray( $sql );
         return $ret;
     }
-    public function deleteProtypeById( $type_id ) {
-        $sql = "delete  from protypes where type_id = $type_id";
-        $ret = parent::fetchSingle( $sql );
+    public function deleteProtypeByName( $type_name ) {
+        $sql = "delete from protypes where type_name like '%$type_name%'";
+        $ret = parent::execute( $sql );
+        // var_dump($sql);
+        // exit;
+        return $ret;
+    }
+    public function updateProtype($type_name,$type_id) {
+        $sql =  "UPDATE protypes SET type_name ='$type_name' where type_id=$type_id";
+        $ret = parent::execute( $sql );
+        
+        return $ret;
+    } 
+    public function createProtype($type_name) {
+        $sql =  "INSERT INTO `protypes`(`type_id`, `type_name`, `display_home`, `pos`) VALUES ('null','$type_name','null','null');";
+        $ret = parent::execute( $sql );
+        // var_dump($sql);
+        // exit;
         return $ret;
     }
  
