@@ -43,7 +43,7 @@ if( $mo_validator->errors ) {
 }
 
 if( $errors ) {
-    $_SESSION["errors"] = $errors;
+    $_SESSION["errors_register"] = $errors;
     header("Location: ".PAGE_URL."/account.php");
     exit;
 }
@@ -59,14 +59,14 @@ $mo_member = new UserMember();
 $user_res = $mo_user->register( $username, $password );
 
 if( !$user_res["status"] ) {
-    $_SESSION["errors"]["error_common"] = $user_res["error"];
+    $_SESSION["errors_register"]["error_common"] = $user_res["error"];
     header("Location: ".PAGE_URL."/account.php");
     exit;
 }
 
 $member_res = $mo_member->registerMember( $user_res["user_id"] );
 if( !$member_res ) {
-    $_SESSION["errors"]["error_common"] = $user_res["error"];
+    $_SESSION["errors_register"]["error_common"] = $user_res["error"];
     header("Location: ".PAGE_URL."/account.php");
     exit;
 }

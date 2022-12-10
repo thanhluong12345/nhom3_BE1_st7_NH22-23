@@ -57,12 +57,13 @@ class Product extends Db{
         return $ret;
     }
 
-    public function getProductLatestByTypeId( $type_id, $limit = 0 ) {
+    public function getProductLatestByTypeId( $type_id, $limit = 0, $where = "" ) {
         $limit_where = "";
         if( $limit ) {
             $limit_where = "limit $limit";
         }
-        $sql = "select * from products where type_id = $type_id order by created_at desc $limit_where";
+        if( $where ) $where = "and $where";
+        $sql = "select * from products where type_id = $type_id $where order by created_at desc $limit_where";
         $ret = parent::fetchArray( $sql );
         if( !$ret ) return array();
         return $ret;
@@ -73,6 +74,22 @@ class Product extends Db{
         $ret = parent::fetchArray( $sql );
         if( !$ret ) return array();
         return $ret;
+    }
+
+    public function getBreadCrumbList( $product_id, $num = 40 ) {
+
+        $product = $this->getProductById( $product_id );
+
+        $breadcrumb_list = 
+        "<ul class=\"bread-crumb\">
+            <li class=\"has-separator\">
+                <a href=\"".PAGE_URL."/home.php\">Trang chủ</a>
+            </li>
+            <li class=\"\">
+                <a href=\"".PAGE_URL."/single-product.php?id=".$product_id."\">".substr($product["name"], 0, $num)."...</a>
+            </li>
+        </ul>";
+        return $breadcrumb_list;
     }
 
 }

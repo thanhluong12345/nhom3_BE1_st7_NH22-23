@@ -3,13 +3,14 @@
     require_once ROOT_LIB_PATH."/func.php";
     require ROOT_MODEL_PATH."/db.php";
     require ROOT_MODEL_PATH."/product.php";
+    require ROOT_MODEL_PATH."/user_comment.php";
 
     $id = $_GET["id"];
     if( !preg_match( "/^[1-9][0-9]*$/", $id ) ) { 
         header("Location: ".PAGE_URL."/home.php");
         exit;
     }
-
+    $mo_comment = new UserComment();
     $mo_product = new Product();
     $product_detail = $mo_product->getProductById( $id );
     if( empty($product_detail) ) {
@@ -17,10 +18,10 @@
         exit;
     }
 
-    $similar_product = $mo_product->getProductLatestByTypeId( $product_detail["type_id"], 4 );
+    $similar_product = $mo_product->getProductLatestByTypeId( $product_detail["type_id"], 4, "id <> ".$product_detail['id'] );
 ?>
 
-<?=l_func_GetHeader("Home")?>
+<?=l_func_GetHeader($product_detail["name"])?>
     <!-- Header /- -->
     <!-- Page Introduction Wrapper -->
     <div class="page-style-a">
@@ -33,7 +34,7 @@
                         <a href="<?=PAGE_URL."/home.php"?>">Trang chủ</a>
                     </li>
                     <li class="is-marked">
-                        <a href="<?=PAGE_URL."/single-product.php?id".$product_detail["id"]?>"><?=$product_detail["name"]?></a>
+                        <a href="<?=PAGE_URL."/single-product.php?id".$product_detail["id"]?>"><?=substr($product_detail["name"], 0, 30)?>...</a>
                     </li>
                 </ul>
             </div>
@@ -53,7 +54,7 @@
                             <a class="active" data-image="<?=ROOT_IMAGE_URL."/product/".$product_detail["image"]?>" data-zoom-image="<?=ROOT_IMAGE_URL."/product/".$product_detail["image"]?>">
                                 <img src="<?=ROOT_IMAGE_URL."/product/".$product_detail["image"]?>" alt="Product">
                             </a>
-                            <a data-image="public/images/product/product@4x.jpg" data-zoom-image="public/images/product/product@4x.jpg">
+                            <!-- <a data-image="public/images/product/product@4x.jpg" data-zoom-image="public/images/product/product@4x.jpg">
                                 <img src="public/images/product/product@2x.jpg" alt="Product">
                             </a>
                             <a data-image="public/images/product/product@4x.jpg" data-zoom-image="public/images/product/product@4x.jpg">
@@ -67,7 +68,7 @@
                             </a>
                             <a data-image="public/images/product/product@4x.jpg" data-zoom-image="public/images/product/product@4x.jpg">
                                 <img src="public/images/product/product@2x.jpg" alt="Product">
-                            </a>
+                            </a> -->
                         </div>
                     </div>
                     <!-- Product-zoom-area /- -->
@@ -81,20 +82,7 @@
                                     <a href="<?=PAGE_URL."/single-product.php?id=".$product_detail["id"]?>"><?=$product_detail["name"]?></a>
                                 </h1>
                             </div>
-                            <ul class="bread-crumb">
-                                <li class="has-separator">
-                                    <a href="home.php">Home</a>
-                                </li>
-                                <li class="has-separator">
-                                    <a href="shop-v1-root-category.php">Men's Clothing</a>
-                                </li>
-                                <li class="has-separator">
-                                    <a href="shop-v2-sub-category.php">Tops</a>
-                                </li>
-                                <li class="is-marked">
-                                    <a href="shop-v3-sub-sub-category.php">Hoodies</a>
-                                </li>
-                            </ul>
+                            <?=$mo_product->getBreadCrumbList($product_detail["id"])?>
                             <div class="product-rating">
                                 <div class='star' title="4.5 out of 5 - based on 23 Reviews">
                                     <span style='width:67px'></span>
@@ -103,7 +91,7 @@
                             </div>
                         </div>
                         <div class="section-2-short-description u-s-p-y-14">
-                            <h6 class="information-heading u-s-m-b-8">Description:</h6>
+                            <h6 class="information-heading u-s-m-b-8">Mô tả:</h6>
                             <p>
                                 <?=$product_detail["description"]?>
                             </p>
@@ -172,7 +160,7 @@
                             </div>
                         </div> -->
                         <div class="section-6-social-media-quantity-actions u-s-p-y-14">
-                                <div class="quick-social-media-wrapper u-s-m-b-22">
+                                <!-- <div class="quick-social-media-wrapper u-s-m-b-22">
                                     <span>Share:</span>
                                     <ul class="social-media-list">
                                         <li>
@@ -201,9 +189,9 @@
                                             </a>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> -->
                                 <div class="quantity-wrapper u-s-m-b-22">
-                                    <span>Quantity:</span>
+                                    <span>Số lượng:</span>
                                     <div class="quantity">
                                         <input type="text" name="quantity" class="quantity-text-field" value="1">
                                         <a class="plus-a" data-max="1000">&#43;</a>
@@ -213,8 +201,8 @@
                                 <div>
                                     <input type="hidden" name="product_id" value="1"/>
                                     <input class="button button-outline-secondary" onclick="addToCart(<?=$product_detail['id']?>)" name="add" type="submit" value="Thêm vào giỏ hàng" />
-                                    <button class="button button-outline-secondary far fa-heart u-s-m-l-6"></button>
-                                    <button class="button button-outline-secondary far fa-envelope u-s-m-l-6"></button>
+                                    <button class="button button-outline-secondary far fa-heart u-s-m-l-6" onClick="addWishlist(<?=$product_detail["id"]?>)" ></button>
+                                    <!-- <button class="button button-outline-secondary far fa-envelope u-s-m-l-6"></button> -->
                                 </div>
                         </div>
                     </div>
@@ -231,9 +219,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link active" data-toggle="tab" href="#description">Mô tả</a>
                                 </li>
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#specification">Thông số kỹ thuật</a>
-                                </li>
+                                </li> -->
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#review">Reviews (15)</a>
                                 </li>
@@ -250,7 +238,7 @@
                             </div>
                             <!-- Description-Tab /- -->
                             <!-- Specifications-Tab -->
-                            <div class="tab-pane fade" id="specification">
+                            <!-- <div class="tab-pane fade" id="specification">
                                 <div class="specification-whole-container">
                                     <div class="spec-ul u-s-m-b-50">
                                         <h4 class="spec-heading">Key Features</h4>
@@ -315,7 +303,7 @@
                                         </table>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- Specifications-Tab /- -->
                             <!-- Reviews-Tab -->
                             <div class="tab-pane fade" id="review">

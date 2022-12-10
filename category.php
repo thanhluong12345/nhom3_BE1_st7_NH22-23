@@ -45,20 +45,20 @@
     $page_max = ceil($cnt_product["cnt"]/$limit);
 ?>
 
-<?=l_func_GetHeader("Home")?>
+<?=l_func_GetHeader(($protype["type_name"]??"")." ".($manufacture["manu_name"]??""))?>
     <!-- Header /- -->
     <!-- Page Introduction Wrapper -->
     <div class="page-style-a">
         <div class="container">
             <div class="page-intro">
-                <h2>Shop</h2>
+                <h2><?=($protype["type_name"]??"")." ".($manufacture["manu_name"]??"")?></h2>
                 <ul class="bread-crumb">
                     <li class="has-separator">
                         <i class="ion ion-md-home"></i>
                         <a href="<?=PAGE_URL."/home.php"?>">Trang chủ</a>
                     </li>
                     <li class="is-marked">
-                        <a href="<?=PAGE_URL."/category.php"?>">Shop</a>
+                        <a href="<?=PAGE_URL."/category.php"?>"><?=($protype["type_name"]??"")." ".($manufacture["manu_name"]??"")?></a>
                     </li>
                 </ul>
             </div>
@@ -178,17 +178,7 @@
                                 </div>
                                 <div class="item-content">
                                     <div class="what-product-is">
-                                        <ul class="bread-crumb">
-                                            <li class="has-separator">
-                                                <a href="shop-v1-root-category.php">Men's</a>
-                                            </li>
-                                            <li class="has-separator">
-                                                <a href="shop-v2-sub-category.php">Tops</a>
-                                            </li>
-                                            <li>
-                                                <a href="shop-v3-sub-sub-category.php">Hoodies</a>
-                                            </li>
-                                        </ul>
+                                        <?=$mo_pro->getBreadCrumbList($product["id"])?>
                                         <h6 class="item-title">
                                             <a href="<?=ROOT_URL."/single-product.php?id=".$product["id"]?>"><?=$product["name"]?></a>
                                         </h6>

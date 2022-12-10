@@ -14,7 +14,7 @@
     $your_profile = $mo_member->getProfile( $user_id );
 ?>
 
-<?=l_func_GetHeader("Home")?>
+<?=l_func_GetHeader("Thanh toán")?>
     <!-- Header /- -->
     <!-- Page Introduction Wrapper -->
     <div class="page-style-a">

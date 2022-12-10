@@ -13,20 +13,20 @@
     $your_profile = $mo_member->getProfile( $user_id );
 ?>
 
-<?=l_func_GetHeader("Home")?>
+<?=l_func_GetHeader("Hồ sơ của bạn")?>
     <!-- Header /- -->
     <!-- Page Introduction Wrapper -->
     <div class="page-style-a">
         <div class="container">
             <div class="page-intro">
-                <h2>Profile</h2>
+                <h2>Hồ sơ của bạn</h2>
                 <ul class="bread-crumb">
                     <li class="has-separator">
                         <i class="ion ion-md-home"></i>
-                        <a href="home.php">Home</a>
+                        <a href="./home.php">Trang chủ</a>
                     </li>
                     <li class="is-marked">
-                        <a href="checkout.php">Profile</a>
+                        <a href="./checkout.php">Hồ sơ của bạn</a>
                     </li>
                 </ul>
             </div>
@@ -42,7 +42,7 @@
                         <div class="row">
                             <!-- Billing-&-Shipping-Details -->
                             <div class="col-lg-8">
-                                <h4 class="section-h4">Your profile</h4>
+                                <h4 class="section-h4">Cập nhật thông tin của bạn</h4>
                                 <!-- Form-Fields -->
                                 <div class="group-inline u-s-m-b-13">
                                     <div class="group-1 u-s-p-r-16">
@@ -93,7 +93,7 @@
                                 </div>
                                
                                 <div class="pt-3 mb-3"> 
-                                    <button type="submit" class="button button-outline-secondary checkout-anchor">Cập nhật profile</button>
+                                    <button type="submit" class="button button-outline-secondary checkout-anchor">Cập nhật hồ sơ</button>
                                 </div>
                             </div>
                         </div>

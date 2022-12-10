@@ -73,8 +73,8 @@ $html .= "</div>";
 $html .= 
 "<div class=\"coupon-continue-checkout u-s-m-b-60\">
     <div class=\"button-area\">
-        <a href=\"".PAGE_URL."/category.php"."\" class=\"continue\">Continue Shopping</a>
-        <a href=\"".PAGE_URL."/checkout.php"."\" class=\"checkout\">Proceed to Checkout</a>
+        <a href=\"".PAGE_URL."/category.php"."\" class=\"continue\">Tiếp tục mua sắm</a>
+        <a href=\"".PAGE_URL."/checkout.php"."\" class=\"checkout\">Thanh toán</a>
     </div>
 </div>";
 

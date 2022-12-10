@@ -17,7 +17,7 @@
 
 ?>
 
-<?=l_func_GetHeader("Home")?>
+<?=l_func_GetHeader("Yêu thích")?>
     <!-- Header /- -->
     <!-- Page Introduction Wrapper -->
     <div class="page-style-a">

@@ -12,20 +12,20 @@
     
 ?>
 
-<?=l_func_GetHeader("Home")?>
+<?=l_func_GetHeader("Giỏ hàng")?>
     <!-- Header /- -->
     <!-- Page Introduction Wrapper -->
     <div class="page-style-a">
         <div class="container">
             <div class="page-intro">
-                <h2>Cart</h2>
+                <h2>Giỏ hàng của bạn</h2>
                 <ul class="bread-crumb">
                     <li class="has-separator">
                         <i class="ion ion-md-home"></i>
-                        <a href="home.php">Home</a>
+                        <a href="<?=PAGE_URL."./home.php"?>">Trang chủ</a>
                     </li>
                     <li class="is-marked">
-                        <a href="cart.php">Cart</a>
+                        <a href="./cart.php">Giỏ hàng</a>
                     </li>
                 </ul>
             </div>
@@ -43,9 +43,9 @@
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Product</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
+                                        <th>Sản phẩm</th>
+                                        <th>Giá</th>
+                                        <th>Số lượng</th>
                                         <th>Subtotal</th>
                                     </tr>
                                 </thead>
@@ -106,8 +106,8 @@
                                 </div>
                             </div> -->
                             <div class="button-area">
-                                <a href="<?=PAGE_URL."/category.php"?>" class="continue">Continue Shopping</a>
-                                <a href="checkout.php" class="checkout">Proceed to Checkout</a>
+                                <a href="<?=PAGE_URL."/category.php"?>" class="continue"> Tiếp tục mua sắm </a>
+                                <a href="checkout.php" class="checkout"> Thanh toán </a>
                             </div>
                         </div>
                         <!-- Coupon /- -->
@@ -116,9 +116,9 @@
                         <div class="table-wrapper-2">
                             <table>
                                 <thead>
-                                    <tr>
+                                    <!-- <tr>
                                         <th colspan="2">Cart Totals</th>
-                                    </tr>
+                                    </tr> -->
                                 </thead>
                                 <tbody>
                                     <!-- <tr>
@@ -192,7 +192,7 @@
                                     </tr> -->
                                     <tr>
                                         <td>
-                                            <h3 class="calc-h3 u-s-m-b-0">Total</h3>
+                                            <h3 class="calc-h3 u-s-m-b-0">Tổng tiền</h3>
                                         </td>
                                         <td>
                                             <span class="calc-text"><?=number_format($cart_list["total_price"])?> <b> VND</b></span>

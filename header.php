@@ -69,13 +69,13 @@
                         <ul class="primary-nav g-nav">
                             <li>
                                 <a href="tel:+111444989">
-                                    <i class="fas fa-phone u-c-brand u-s-m-r-9"></i>
-                                    Telephone:+111-444-989</a>
+                                    <!-- <i class="fas fa-phone u-c-brand u-s-m-r-9"></i>
+                                    Telephone:+111-444-989</a> -->
                             </li>
                             <li>
                                 <a href="mailto:contact@domain.com">
-                                    <i class="fas fa-envelope u-c-brand u-s-m-r-9"></i>
-                                    E-mail: contact@domain.com
+                                    <!-- <i class="fas fa-envelope u-c-brand u-s-m-r-9"></i>
+                                    E-mail: contact@domain.com -->
                                 </a>
                             </li>
                         </ul>
@@ -83,7 +83,7 @@
                     <nav>
                         <ul class="secondary-nav g-nav">
                             <li>
-                                <a>
+                                <a style="font-weight:bold;">
                                     <?=$mo_member->checklogin()?$your_profile["firstname"]." ".$your_profile["lastname"]:"My Account"?>
                                     <i class="fas fa-chevron-down u-s-m-l-9"></i>
                                 </a>
@@ -92,31 +92,31 @@
                                     <li>
                                         <a href="<?=PAGE_URL."/profile.php"?>">
                                             <i class="far fa-heart u-s-m-r-9"></i>
-                                            Profile</a>
+                                            Cập nhật hồ sơ</a>
                                     </li>
                                     <?php } ?>
 
                                     <li>
                                         <a href="<?=PAGE_URL."/cart.php"?>">
                                             <i class="fas fa-cog u-s-m-r-9"></i>
-                                            My Cart</a>
+                                            Giỏ hàng</a>
                                     </li>
                                     <li>
                                         <a href="<?=PAGE_URL."/checkout.php"?>">
                                             <i class="far fa-check-circle u-s-m-r-9"></i>
-                                            Checkout</a>
+                                            Thanh toán</a>
                                     </li>
                                     <?php if( $mo_member->checkLogin() ) { ?>
                                         <li>
                                             <a href="<?=ACTION_PAGE_URL."/conf_logout.php"?>">
                                                 <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
-                                                Logout</a>
+                                                Đăng xuất</a>
                                         </li>
                                     <?php } else { ?>
                                         <li>
                                             <a href="<?=PAGE_URL."/account.php"?>">
                                                 <i class="fas fa-sign-in-alt u-s-m-r-9"></i>
-                                                Login / Signup</a>
+                                                Đăng nhập / Đăng ký</a>
                                         </li>
                                     <?php } ?>
                                 </ul>
@@ -158,7 +158,7 @@
                         <div class="col-lg-3 col-md-9 col-sm-6">
                             <div class="brand-logo text-lg-center">
                                 <a href="<?=PAGE_URL."/home.php"?>">
-                                    <img src="public/images/main-logo/groover-branding-1.png" alt="Groover Brand Logo" class="app-brand-logo">
+                                    <img src="public/images/main-logo/logo.png" alt="Groover Brand Logo" class="app-brand-logo">
                                 </a>
                             </div>
                         </div>
@@ -198,8 +198,8 @@
                             <nav>
                                 <ul class="mid-nav g-nav">
                                     <li class="u-d-none-lg">
-                                        <a href="<?=PAGE_URL."/home.php"?>">
-                                            <i class="ion ion-md-home u-c-brand"></i>
+                                        <a href="<?=PAGE_URL."/cart.php"?>">
+                                            <i class="ion ion-md-cart u-c-brand"></i>
                                         </a>
                                     </li>
                                     <li class="u-d-none-lg">
@@ -238,7 +238,7 @@
             <div class="mini-cart-wrapper" id="mini-cart-wrapper-popup">
                 <div class="mini-cart">
                     <div class="mini-cart-header">
-                        YOUR CART
+                        Giỏ hàng của bạn
                         <button type="button" class="button ion ion-md-close" id="mini-cart-close"></button>
                     </div>
                     <ul class="mini-cart-list">
@@ -254,12 +254,12 @@
                         <?php } ?>
                     </ul>
                     <div class="mini-shop-total clearfix">
-                        <span class="mini-total-heading float-left">Total:</span>
+                        <span class="mini-total-heading float-left">Tổng tiền:</span>
                         <span class="mini-total-price float-right"><?= number_format($cart_list["total_price"])." VND" ?></span>
                     </div>
                     <div class="mini-action-anchors">
-                        <a href="<?=PAGE_URL."/cart.php"?>" class="cart-anchor">View Cart</a>
-                        <a href="<?=PAGE_URL."/checkout.php"?>" class="checkout-anchor">Checkout</a>
+                        <a href="<?=PAGE_URL."/cart.php"?>" class="cart-anchor">Đi đến giỏ hàng</a>
+                        <a href="<?=PAGE_URL."/checkout.php"?>" class="checkout-anchor">Thanh toán</a>
                     </div>
                 </div>
             </div>
@@ -269,10 +269,10 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-lg-3">
-                            <div class="v-menu v-close">
+                            <div class="v-menu">
                                 <span class="v-title">
                                     <i class="ion ion-md-menu"></i>
-                                    All Categories
+                                    Danh mục
                                     <i class="fas fa-angle-down"></i>
                                 </span>
                                 <nav>
