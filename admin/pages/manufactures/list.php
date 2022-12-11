@@ -16,6 +16,7 @@
     $protype_list = $mo_protype->getAllprotypes();
     $product_list = $producttest->getProductAll();
     $manufactures_list = $manufactures->getManufacture();
+    
 ?>
 
 <?php require ROOT_ADMIN."/components/header.php"; ?>
@@ -38,16 +39,7 @@
                           ID
                         </th>
                         <th>
-                          Name
-                        </th>
-                        <th>
-                          Country
-                        </th>
-                        <th>
-                          City
-                        </th>
-                        <th>
-                          Salary
+                          name
                         </th>
                         <th>
                           Action
@@ -65,9 +57,7 @@
                           <td>
                             <?php echo $value['manu_name'] ?>
                           </td>
-                          <?php
-                          endforeach
-                          ?>
+                          
                           <td>
                             <a href="<?=ROOT_ADMIN_URL."/pages/manufactures/edit.php?id="?>" class="btn btn-primary btn-round">
                               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -76,31 +66,9 @@
                               <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
                           </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            2
-                          </td>
-                          <td>
-                            Minerva Hooper
-                          </td>
-                          <td>
-                            Curaçao
-                          </td>
-                          <td>
-                            Sinaai-Waas
-                          </td>
-                          <td class="text-primary">
-                            $23,789
-                          </td>
-                          <td>
-                            <a href="<?=ROOT_ADMIN_URL."/pages/manufactures/edit.php"?>" class="btn btn-primary btn-round">
-                              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                            </a>
-                            <a href="<?=ROOT_ADMIN_URL."/pages/manufactures/delete.php"?>" class="btn btn-primary btn-round">
-                              <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                          </td>
+                          <?php
+                          endforeach
+                          ?>
                         </tr>
                       </tbody>
                     </table>

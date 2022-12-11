@@ -26,4 +26,25 @@ class Manufacture extends Db
         $ret = parent::fetchArray($sql);
         return $ret;
     }
+    public function deleteManufactureByName( $manu_name ) {
+        $sql = "delete from protypes where type_name like '%$manu_name%'";
+        $ret = parent::execute( $sql );
+        // var_dump($sql);
+        // exit;
+        return $ret;
+    }
+    public function updateManufacture($manu_name,$manu_id) {
+        $sql =  "UPDATE protypes SET manu_name ='$manu_name' where manu_id=$manu_id";
+        $ret = parent::execute( $sql );
+        
+        return $ret;
+    } 
+    public function createManufacture($manu_name) {
+        $sql =  "INSERT INTO `manufacture`(`manu_id`, `manu_name`) VALUES ('null','$manu_name');";
+        $ret = parent::execute( $sql );
+        // var_dump($sql);
+        // exit;
+        return $ret;
+    }
+ 
 }
