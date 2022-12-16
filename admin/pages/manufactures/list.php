@@ -1,5 +1,11 @@
 <?php 
   require_once "../../../lib/config.php";
+  require_once ROOT_MODEL_PATH."/db.php";
+  require_once ROOT_MODEL_PATH."/manufacture.php";
+
+  $mo_manu = new Manufacture();
+
+  $manu_list = $mo_manu->getManufactureAll();
 ?>
 
 <?php require ROOT_ADMIN."/components/header.php"; ?>
@@ -17,77 +23,36 @@
                 <div class="card-body">
                   <div class="table-responsive">
                     <table class="table">
-                      <thead class=" text-primary">
+                    <thead class=" text-primary">
                         <th>
                           ID
                         </th>
                         <th>
-                          Name
-                        </th>
-                        <th>
-                          Country
-                        </th>
-                        <th>
-                          City
-                        </th>
-                        <th>
-                          Salary
+                          Tên hãng
                         </th>
                         <th>
                           Action
                         </th>
                       </thead>
                       <tbody>
+                        <?php foreach( $manu_list as $manu ) { ?>
                         <tr>
                           <td>
-                            1
+                            <?=$manu["manu_id"]?>
                           </td>
                           <td>
-                            Dakota Rice
+                          <?=$manu["manu_name"]?>
                           </td>
                           <td>
-                            Niger
-                          </td>
-                          <td>
-                            Oud-Turnhout
-                          </td>
-                          <td class="text-primary">
-                            $36,738
-                          </td>
-                          <td>
-                            <a href="<?=ROOT_ADMIN_URL."/pages/manufactures/edit.php?id="?>" class="btn btn-primary btn-round">
+                            <a href="<?=ROOT_ADMIN_URL."/pages/manufactures/edit.php?id=".$manu["manu_id"]?>" class="btn btn-primary btn-round">
                               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </a>
-                            <a href="<?=ROOT_ADMIN_URL."/pages/manufactures/delete.php"?>" class="btn btn-primary btn-round">
+                            <a href="<?=ROOT_ADMIN_URL."/pages/manufactures/delete.php?id=".$manu["manu_id"]?>" class="btn btn-primary btn-round">
                               <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
                           </td>
                         </tr>
-                        <tr>
-                          <td>
-                            2
-                          </td>
-                          <td>
-                            Minerva Hooper
-                          </td>
-                          <td>
-                            Curaçao
-                          </td>
-                          <td>
-                            Sinaai-Waas
-                          </td>
-                          <td class="text-primary">
-                            $23,789
-                          </td>
-                          <td>
-                            <a href="<?=ROOT_ADMIN_URL."/pages/manufactures/edit.php"?>" class="btn btn-primary btn-round">
-                              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                            </a>
-                            <a href="<?=ROOT_ADMIN_URL."/pages/manufactures/delete.php"?>" class="btn btn-primary btn-round">
-                              <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                          </td>
-                        </tr>
+                        <?php } ?>
                       </tbody>
                     </table>
                   </div>

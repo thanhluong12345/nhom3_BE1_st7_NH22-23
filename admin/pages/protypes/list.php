@@ -1,5 +1,11 @@
 <?php 
   require_once "../../../lib/config.php";
+  require_once ROOT_MODEL_PATH."/db.php";
+  require_once ROOT_MODEL_PATH."/protype.php";
+
+  $mo_protype = new Protype();
+
+  $protype_list = $mo_protype->getProtypeAll();
 ?>
 
 <?php require ROOT_ADMIN."/components/header.php"; ?>
@@ -22,72 +28,37 @@
                           ID
                         </th>
                         <th>
-                          Name
+                          Tên loại
                         </th>
                         <th>
-                          Country
-                        </th>
-                        <th>
-                          City
-                        </th>
-                        <th>
-                          Salary
+                          Hiển thị trên trang chủ
                         </th>
                         <th>
                           Action
                         </th>
                       </thead>
                       <tbody>
+                        <?php foreach( $protype_list as $protype ) { ?>
                         <tr>
                           <td>
-                            1
+                            <?=$protype["type_id"]?>
                           </td>
                           <td>
-                            Dakota Rice
+                          <?=$protype["type_name"]?>
                           </td>
                           <td>
-                            Niger
+                          <?=$protype["display_home"]<0?"Không":"Có"?>
                           </td>
                           <td>
-                            Oud-Turnhout
-                          </td>
-                          <td class="text-primary">
-                            $36,738
-                          </td>
-                          <td>
-                            <a href="<?=ROOT_ADMIN_URL."/pages/protypes/edit.php?id="?>" class="btn btn-primary btn-round">
+                            <a href="<?=ROOT_ADMIN_URL."/pages/protypes/edit.php?id=".$protype["type_id"]?>" class="btn btn-primary btn-round">
                               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </a>
-                            <a href="<?=ROOT_ADMIN_URL."/pages/protypes/delete.php"?>" class="btn btn-primary btn-round">
+                            <a href="<?=ROOT_ADMIN_URL."/pages/protypes/delete.php?id=".$protype["type_id"]?>" class="btn btn-primary btn-round">
                               <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
                           </td>
                         </tr>
-                        <tr>
-                          <td>
-                            2
-                          </td>
-                          <td>
-                            Minerva Hooper
-                          </td>
-                          <td>
-                            Curaçao
-                          </td>
-                          <td>
-                            Sinaai-Waas
-                          </td>
-                          <td class="text-primary">
-                            $23,789
-                          </td>
-                          <td>
-                            <a href="<?=ROOT_ADMIN_URL."/pages/protypes/edit.php"?>" class="btn btn-primary btn-round">
-                              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                            </a>
-                            <a href="<?=ROOT_ADMIN_URL."/pages/protypes/delete.php"?>" class="btn btn-primary btn-round">
-                              <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                          </td>
-                        </tr>
+                        <?php } ?>
                       </tbody>
                     </table>
                   </div>

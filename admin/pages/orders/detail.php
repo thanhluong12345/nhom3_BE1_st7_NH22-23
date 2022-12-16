@@ -1,13 +1,19 @@
 <?php 
   require_once "../../../lib/config.php";
   require_once ROOT_MODEL_PATH."/db.php";
-  require_once ROOT_MODEL_PATH."/protype.php";
+  require_once ROOT_MODEL_PATH."/user.php";
+  require_once ROOT_MODEL_PATH."/order.php";
+  require_once ROOT_MODEL_PATH."/product.php";
+  require_once ROOT_MODEL_PATH."/user_member.php";
 
-  $mo_type = new Protype();
+  $mo_order = new Order();
+  $mo_member = new UserMember();
+  $mo_pro = new Product();
+
   if( isset( $_GET["id"] ) ) {
-    $protype = $mo_type->getProtypeById($_GET["id"]);
+    $order = $mo_order->getOrderById( $_GET["id"] );
+    $user_member = $mo_member->getUserMember( $order["user_id"] );
   }
-
 ?>
 
 <?php require ROOT_ADMIN."/components/header.php"; ?>
@@ -18,15 +24,15 @@
             <div class="col-md-8">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title">Nhập loại</h4>
+                  <h4 class="card-title">Nhập hãng </h4>
                 </div>
                 <div class="card-body">
-                  <form action="<?=ROOT_ADMIN_URL."/pages/protypes/".(isset($protype)?"update.php":"create.php")?>">
+                  <form action="<?=ROOT_ADMIN_URL."/pages/manufactures/".(isset($manufacture)?"update.php":"create.php")?>">
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="bmd-label-floating">id</label>
-                          <input name="id" type="text" value="<?=$protype["type_id"]??""?>" class="form-control" disabled>
+                          <input name="id" type="text" value="<?=$manufacture["manu_id"]??""?>" class="form-control" disabled>
                         </div>
                       </div>
                     </div>
@@ -34,11 +40,11 @@
                       <div class="col-md-12">
                         <div class="form-group">
                           <label class="bmd-label-floating">Tên hãng</label>
-                          <input name="type_name" type="text" value="<?=$protype["type_name"]??""?>" class="form-control">
+                          <input name="manu_name" type="text" value="<?=$manufacture["manu_name"]??""?>" class="form-control">
                         </div>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-primary pull-right"><?=isset($protype)?"Update":"Create"?></button>
+                    <button type="submit" class="btn btn-primary pull-right"><?=isset($manufacture)?"Update":"Create"?></button>
                     <div class="clearfix"></div>
                   </form>
                 </div>

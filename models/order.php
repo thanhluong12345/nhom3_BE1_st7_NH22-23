@@ -19,4 +19,26 @@ class Order extends Db {
         
         return true;
     }
+
+    public function getOrderAll( ) {
+        $sql = "select * from orders";
+        $order_list = parent::fetchArray( $sql );
+
+        foreach( $order_list as $key => $order ) {
+            $sql = "select * from order_details where order_id = ".$order["order_id"];
+            $order_details = parent::fetchArray( $sql );
+            $order_list[$key]["order_details"] = $order_details;
+        }
+        
+        return $order_list;
+    }
+
+    public function getOrderById( $order_id ) {
+        $sql = "select * from orders where order_id = ".$order_id." ";
+        $ret = parent::fetchSingle($sql);
+        $sql = "select * from order_details where order_id = ".$ret["order_id"];
+        $order_details = parent::fetchArray( $sql );
+        $ret["order_details"] = $order_details;
+        return $ret;
+    }
 }

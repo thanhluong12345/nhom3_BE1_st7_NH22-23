@@ -115,4 +115,13 @@ class UserMember extends User {
             return true;
         }
     }
+
+    public function getUserMembers( $columns = "*", $limit = "", $where = "" ) {
+        if( $where ) {
+            $where = " where $where ";
+        }
+        $sql = "select $columns from user_members $where $limit";
+        $ret = parent::fetchArray($sql);
+        return $ret;
+    }
 }

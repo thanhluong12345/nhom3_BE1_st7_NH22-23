@@ -1,6 +1,17 @@
 <?php 
   require_once "../../../lib/config.php";
   require_once ROOT_ADMIN."/lib/func.php";
+  require_once ROOT_MODEL_PATH."/db.php";
+  require_once ROOT_MODEL_PATH."/product.php";
+  require_once ROOT_MODEL_PATH."/manufacture.php";
+  require_once ROOT_MODEL_PATH."/protype.php";
+
+  $mo_pro = new Product();
+  $mo_manu = new Manufacture();
+  $mo_protype = new Protype();
+
+  $product_list = $mo_pro->getProductAll();
+
 ?>
 
 <?php require ROOT_ADMIN."/components/header.php"; ?>
@@ -24,72 +35,63 @@
                           ID
                         </th>
                         <th>
-                          Name
+                          Ảnh
                         </th>
                         <th>
-                          Country
+                          Tên
                         </th>
                         <th>
-                          City
+                          Tên hãng
                         </th>
                         <th>
-                          Salary
+                          Tên loại
+                        </th>
+                        <th>
+                          Giá
+                        </th>
+                        <th>
+                          Nổi bật
                         </th>
                         <th>
                           Action
                         </th>
                       </thead>
                       <tbody>
+                        <?php foreach( $product_list as $product ) { ?>
+                          <?php $manufacture = $mo_manu->getManufactureById($product["manu_id"]); ?>
+                          <?php $protype = $mo_protype->getProtypeById($product["type_id"]); ?>
                         <tr>
                           <td>
-                            1
+                            <?=$product["id"]?>
                           </td>
                           <td>
-                            Dakota Rice
+                            <img width="70" src="<?=ROOT_IMAGE_URL."/product/".$product["image"]?>" alt="">
+                          </td>
+                          <td style="width:150px;">
+                            <?=$product["name"]?>
                           </td>
                           <td>
-                            Niger
+                            <?=$manufacture["manu_name"]?>
                           </td>
                           <td>
-                            Oud-Turnhout
+                            <?=$protype["type_name"]?>
                           </td>
                           <td class="text-primary">
-                            $36,738
+                            <?=number_format($product["price"])?> VND
                           </td>
                           <td>
-                            <a href="<?=ROOT_ADMIN_URL."/pages/products/edit.php?id"?>" class="btn btn-primary btn-round">
+                            <?=$product["feature"]<1?"Không":"Có"?>
+                          </td>
+                          <td>
+                            <a href="<?=ROOT_ADMIN_URL."/pages/products/edit.php?id=".$product["id"]?>" class="btn btn-primary btn-round">
                               <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </a>
-                            <a href="<?=ROOT_ADMIN_URL."/pages/products/delete.php"?>" class="btn btn-primary btn-round">
+                            <a href="<?=ROOT_ADMIN_URL."/pages/products/delete.php?id=".$product["id"]?>" class="btn btn-primary btn-round">
                               <i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
                           </td>
                         </tr>
-                        <tr>
-                          <td>
-                            2
-                          </td>
-                          <td>
-                            Minerva Hooper
-                          </td>
-                          <td>
-                            Curaçao
-                          </td>
-                          <td>
-                            Sinaai-Waas
-                          </td>
-                          <td class="text-primary">
-                            $23,789
-                          </td>
-                          <td>
-                            <a href="<?=ROOT_ADMIN_URL."/pages/products/edit.php"?>" class="btn btn-primary btn-round">
-                              <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                            </a>
-                            <a href="<?=ROOT_ADMIN_URL."/pages/products/delete.php"?>" class="btn btn-primary btn-round">
-                              <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                          </td>
-                        </tr>
+                        <?php } ?>
                       </tbody>
                     </table>
                   </div>

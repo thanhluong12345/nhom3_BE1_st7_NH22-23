@@ -20,4 +20,11 @@ class Protype extends Db {
         $ret = parent::fetchSingle( $sql );
         return $ret;
     }
+
+    public function getProtypeAll() {
+        $sql = "select * from protypes";
+        $ret = parent::fetchArray( $sql );
+        return $ret;
+    }
+
 }

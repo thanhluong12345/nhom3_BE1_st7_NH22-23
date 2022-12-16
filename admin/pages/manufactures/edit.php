@@ -1,5 +1,12 @@
 <?php 
   require_once "../../../lib/config.php";
+  require_once ROOT_MODEL_PATH."/db.php";
+  require_once ROOT_MODEL_PATH."/manufacture.php";
+
+  $mo_manu = new Manufacture();
+  if( isset( $_GET["id"] ) ) {
+    $manufacture = $mo_manu->getManufactureById($_GET["id"]);
+  }
 ?>
 
 <?php require ROOT_ADMIN."/components/header.php"; ?>
@@ -10,85 +17,27 @@
             <div class="col-md-8">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title">Edit Profile</h4>
-                  <p class="card-category">Complete your profile</p>
+                  <h4 class="card-title">Nhập hãng </h4>
                 </div>
                 <div class="card-body">
-                  <form>
+                  <form action="<?=ROOT_ADMIN_URL."/pages/manufactures/".(isset($manufacture)?"update.php":"create.php")?>">
                     <div class="row">
-                      <div class="col-md-5">
+                      <div class="col-md-12">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Company (disabled)</label>
-                          <input type="text" class="form-control" disabled>
-                        </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Username</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Email address</label>
-                          <input type="email" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Fist Name</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Last Name</label>
-                          <input type="text" class="form-control">
+                          <label class="bmd-label-floating">id</label>
+                          <input name="id" type="text" value="<?=$manufacture["manu_id"]??""?>" class="form-control" disabled>
                         </div>
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label class="bmd-label-floating">Adress</label>
-                          <input type="text" class="form-control">
+                          <label class="bmd-label-floating">Tên hãng</label>
+                          <input name="manu_name" type="text" value="<?=$manufacture["manu_name"]??""?>" class="form-control">
                         </div>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">City</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Country</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Postal Code</label>
-                          <input type="text" class="form-control">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <label>About Me</label>
-                          <div class="form-group">
-                            <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
-                            <textarea class="form-control" rows="5"></textarea>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary pull-right">Update Profile</button>
+                    <button type="submit" class="btn btn-primary pull-right"><?=isset($manufacture)?"Update":"Create"?></button>
                     <div class="clearfix"></div>
                   </form>
                 </div>

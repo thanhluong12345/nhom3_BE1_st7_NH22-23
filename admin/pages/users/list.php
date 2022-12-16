@@ -1,6 +1,13 @@
 <?php 
-  require_once "../../../lib/config.php";
-?>
+    require_once "../../../lib/config.php";
+    require_once ROOT_MODEL_PATH."/db.php";
+    require_once ROOT_MODEL_PATH."/user.php";
+    require_once ROOT_MODEL_PATH."/user_member.php";
+
+    $mo_member = new UserMember();
+    $user_member_list = $mo_member->getUserMembers();
+
+    ?>
 
 <?php require ROOT_ADMIN."/components/header.php"; ?>
       <!-- End Navbar -->
@@ -22,66 +29,49 @@
                           ID
                         </th>
                         <th>
-                          Name
+                          Họ
                         </th>
                         <th>
-                          Country
+                          Tên
                         </th>
                         <th>
-                          City
+                          Địa chỉ
                         </th>
                         <th>
-                          Salary
+                          Số điện thoại
                         </th>
                         <th>
-                          Action
+                          Email
                         </th>
                       </thead>
                       <tbody>
+                      <?php foreach( $user_member_list as $member ) { ?>
                         <tr>
                           <td>
-                            1
+                            <?=$member["user_id"]?>
                           </td>
                           <td>
-                            Dakota Rice
+                            <?=$member["firstname"]?>
                           </td>
                           <td>
-                            Niger
+                            <?=$member["lastname"]?>
                           </td>
                           <td>
-                            Oud-Turnhout
+                            <?=$member["city"]." ".$member["district"]." ".$member["street"]?>
                           </td>
                           <td class="text-primary">
-                            $36,738
+                            <?=$member["phone"]?>
                           </td>
-                          <td>
+                          <td class="text-primary">
+                            <?=$member["email"]?>
+                          </td>
+                          <!-- <td>
                             <a href="#pablo" class="btn btn-primary btn-round">
                             <i class="material-icons">visibility</i>
                             </a>
-                          </td>
+                          </td> -->
                         </tr>
-                        <tr>
-                          <td>
-                            2
-                          </td>
-                          <td>
-                            Minerva Hooper
-                          </td>
-                          <td>
-                            Curaçao
-                          </td>
-                          <td>
-                            Sinaai-Waas
-                          </td>
-                          <td class="text-primary">
-                            $23,789
-                          </td>
-                          <td>
-                            <a href="#pablo" class="btn btn-primary btn-round">
-                            <i class="material-icons">visibility</i>
-                            </a>
-                          </td>
-                        </tr>
+                      <?php } ?>
                       </tbody>
                     </table>
                   </div>

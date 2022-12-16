@@ -1,9 +1,9 @@
 <?php
   session_start();
   require_once $_SERVER["DOCUMENT_ROOT"]."/nhom3_BE1_st7_NH22-23/lib/config.php";
-  require ROOT_MODEL_PATH."/db.php";
-  require ROOT_MODEL_PATH."/user.php";
-  require ROOT_ADMIN."/models/user_admin.php";
+  require_once ROOT_MODEL_PATH."/db.php";
+  require_once ROOT_MODEL_PATH."/user.php";
+  require_once ROOT_ADMIN."/models/user_admin.php";
   $mo_admin = new UserAdmin();
   $mo_admin->checkLogin( ROOT_ADMIN_URL."/login.php", false);
 

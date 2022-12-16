@@ -1,5 +1,16 @@
 <?php 
   require_once "../../../lib/config.php";
+  require_once ROOT_MODEL_PATH."/db.php";
+  require_once ROOT_MODEL_PATH."/user.php";
+  require_once ROOT_MODEL_PATH."/order.php";
+  require_once ROOT_MODEL_PATH."/product.php";
+  require_once ROOT_MODEL_PATH."/user_member.php";
+
+  $mo_order = new Order();
+  $mo_member = new UserMember();
+  $mo_pro = new Product();
+
+  $order_list = $mo_order->getOrderAll();
 ?>
 
 <?php require ROOT_ADMIN."/components/header.php"; ?>
@@ -19,69 +30,57 @@
                     <table class="table">
                       <thead class=" text-primary">
                         <th>
-                          ID
+                          Order id
                         </th>
                         <th>
-                          Name
+                          Tên khách hàng
                         </th>
                         <th>
-                          Country
+                          Địa chỉ giao hàng
                         </th>
                         <th>
-                          City
+                          Tổng tiền
                         </th>
                         <th>
-                          Salary
+                          Ghi chú
                         </th>
                         <th>
                           Action
                         </th>
                       </thead>
                       <tbody>
+                        <?php foreach( $order_list as $order ) { ?>
+                        <?php
+                          $total = 0;
+                          foreach( $order["order_details"] as $detail ) {
+                            $total += $detail["unit_price"] * $detail["quantity"];
+                          }
+
+                          $user_member =  $mo_member->getUserMember($order["user_id"]);
+                        ?>
                         <tr>
                           <td>
-                            1
+                            <?=$order["order_id"]?>
                           </td>
                           <td>
-                            Dakota Rice
+                            <?=$user_member["firstname"]." ".$user_member["lastname"]?>
+                          </td>
+                          <td style="width:150px;">
+                            <?=$order["ship_address"]?>
                           </td>
                           <td>
-                            Niger
-                          </td>
-                          <td>
-                            Oud-Turnhout
+                            <?=number_format($total)?> VND
                           </td>
                           <td class="text-primary">
-                            $36,738
+                            <?=$order["order_notes"]?>
                           </td>
                           <td>
-                            <a href="#pablo" class="btn btn-primary btn-round">
+                            <a href="<?=ROOT_ADMIN_URL."/pages/orders/detail.php?id=".$order["order_id"]?>" class="btn btn-primary btn-round">
                             <i class="material-icons">visibility</i>
                             </a>
                           </td>
                         </tr>
-                        <tr>
-                          <td>
-                            2
-                          </td>
-                          <td>
-                            Minerva Hooper
-                          </td>
-                          <td>
-                            Curaçao
-                          </td>
-                          <td>
-                            Sinaai-Waas
-                          </td>
-                          <td class="text-primary">
-                            $23,789
-                          </td>
-                          <td>
-                            <a href="#pablo" class="btn btn-primary btn-round">
-                            <i class="material-icons">visibility</i>
-                            </a>
-                          </td>
-                        </tr>
+                        <?php } ?>
                       </tbody>
                     </table>
                   </div>
