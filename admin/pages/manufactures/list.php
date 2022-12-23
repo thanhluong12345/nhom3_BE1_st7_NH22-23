@@ -3,6 +3,10 @@
   require_once ROOT_MODEL_PATH."/db.php";
   require_once ROOT_MODEL_PATH."/manufacture.php";
 
+  if( isset($_GET["error"]) ) {
+    echo "<script> alert(".$_GET["error"].") </script>";
+  }
+
   $mo_manu = new Manufacture();
 
   $manu_list = $mo_manu->getManufactureAll();

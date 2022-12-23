@@ -3,6 +3,10 @@
   require_once ROOT_MODEL_PATH."/db.php";
   require_once ROOT_MODEL_PATH."/manufacture.php";
 
+  if( isset($_GET["error"]) ) {
+    echo "<script> alert(".$_GET["error"].") </script>";
+  }
+
   $mo_manu = new Manufacture();
   if( isset( $_GET["id"] ) ) {
     $manufacture = $mo_manu->getManufactureById($_GET["id"]);
@@ -20,12 +24,11 @@
                   <h4 class="card-title">Nhập hãng </h4>
                 </div>
                 <div class="card-body">
-                  <form action="<?=ROOT_ADMIN_URL."/pages/manufactures/".(isset($manufacture)?"update.php":"create.php")?>">
+                  <form action="<?=ROOT_ADMIN_URL."/pages/manufactures/".(isset($manufacture)?"update.php":"create.php")?>" method="POST">
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label class="bmd-label-floating">id</label>
-                          <input name="id" type="text" value="<?=$manufacture["manu_id"]??""?>" class="form-control" disabled>
+                          <input name="id" type="hidden" value="<?=$manufacture["manu_id"]??""?>" class="form-control">
                         </div>
                       </div>
                     </div>

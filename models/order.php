@@ -41,4 +41,14 @@ class Order extends Db {
         $ret["order_details"] = $order_details;
         return $ret;
     }
+
+    public function insert( $insert ) {
+        $sql = "insert into orders $insert ";
+        parent::execute( $sql );
+    }
+
+    public function update( $update, $where ) {
+        $sql = "update orders $update $where ";
+        parent::execute( $sql );
+    }
 }

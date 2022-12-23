@@ -68,7 +68,7 @@
                                         <td>
                                             <div class="cart-quantity">
                                                 <div class="quantity">
-                                                    <input type="text" class="quantity-text-field" value="<?=$product["num_cart"]?>">
+                                                    <input name="quantity<?=$product["id"]?>" type="text" class="quantity-text-field" value="<?=$product["num_cart"]?>">
                                                     <a class="plus-a" data-max="1000">&#43;</a>
                                                     <a class="minus-a" data-min="1">&#45;</a>
                                                 </div>
@@ -77,7 +77,7 @@
                                         <td>
                                             <div class="action-wrapper">
                                                 <input type="hidden" name="product_id" value="<?=$product["id"]?>" />
-                                                <button class="button button-outline-secondary fas fa-sync"></button>
+                                                <button class="button button-outline-secondary fas fa-sync" name="refresh" onclick="refreshCart(<?=$product["id"]?>)" ></button>
                                                 <button class="button button-outline-secondary fas fa-trash" name="delete" onclick="removeCart(<?=$product["id"]?>)" ></button>
                                             </div>
                                         </td>

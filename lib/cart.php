@@ -7,7 +7,24 @@ class Cart {
         return $_SESSION["carts"];
     }
 
-    public function addToCart( $product_id, $quantity) {
+    public function refreshCart( $product_id, $quantity ) {
+        $carts = array();
+        if( !isset($_SESSION["carts"]) ) {
+            return false;
+        } 
+        else {
+            $carts = $_SESSION["carts"];
+            if( !isset($_SESSION["carts"][$product_id]) ) {
+                return false;
+            } 
+            else {
+                $carts[$product_id] = $quantity;
+            }
+        }
+        $_SESSION["carts"] = $carts;
+    }
+
+    public function addToCart( $product_id, $quantity ) {
         $carts = array();
         if( !isset($_SESSION["carts"]) ) {
             $carts[$product_id] = $quantity;

@@ -5,7 +5,7 @@ class UserwishList extends Db {
     public function getWishList( $where = "", $limit = 0 ) {
         if( !$where ) return false;
 
-        $sql = "select * from user_wishlist where $where";
+        $sql = "select * from user_wishlist where $where order by id desc";
         if( $limit == 1 ) {
             $wishlist = parent::fetchSingle( $sql );
             

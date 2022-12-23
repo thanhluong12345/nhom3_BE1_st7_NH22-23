@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2022 at 04:22 PM
+-- Generation Time: Dec 23, 2022 at 08:35 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -62,7 +62,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `user_id`, `ship_address`, `order_notes`, `order_date`) VALUES
-(12, 1, 'ninh thuận,phước thuận, ninh phước,vạn phước', '', '2022-11-28 01:41:42');
+(13, 1, 'ninh thuận,phước thuận, ninh phước,vạn phước', '', '2022-12-24 01:20:33');
 
 -- --------------------------------------------------------
 
@@ -83,9 +83,9 @@ CREATE TABLE `order_details` (
 --
 
 INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `unit_price`, `quantity`) VALUES
-(10, 12, 16, 3990000, 1),
-(11, 12, 14, 2200000, 2),
-(12, 12, 5, 28490000, 1);
+(13, 13, 16, 3990000, 1),
+(14, 13, 11, 899000, 1),
+(15, 13, 10, 2790000, 1);
 
 -- --------------------------------------------------------
 
@@ -177,7 +177,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `created_at`, `modifed_at`, `deleted_at`) VALUES
-(1, 'thanhluong', '$2y$10$HKxr4GPsxURrqUf/2M9eJuLWx0sxy12yVdCxss0SeydbVqu2lmxm6', '2022-11-25 06:52:12', NULL, NULL);
+(1, 'thanhluong', '$2y$10$HKxr4GPsxURrqUf/2M9eJuLWx0sxy12yVdCxss0SeydbVqu2lmxm6', '2022-11-25 06:52:12', NULL, NULL),
+(2, 'admin', '$2y$10$XO6flbHUOJOvrQlzF98KVO5vHlDX0SyM/J4RHhv41xn/AG4pwjwh6', '2022-12-02 17:58:57', NULL, NULL),
+(3, 'fff', '$2y$10$XO6flbHUOJOvrQlzF98KVO5vHlDX0SyM/J4RHhv41xn/AG4pwjwh6', '2022-12-02 18:34:50', NULL, NULL),
+(4, 'thanhluong2', '$2y$10$HKxr4GPsxURrqUf/2M9eJuLWx0sxy12yVdCxss0SeydbVqu2lmxm6', '2022-11-25 06:52:12', NULL, NULL),
+(5, 'luong', '$2y$10$HpGHe8exMeBDOQoKiNYgx.7htKvW0UFyY8WQHTamqpnSoQuCrTRAu', '2022-12-18 09:27:07', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -194,6 +198,36 @@ CREATE TABLE `user_admin` (
   `updated_at` datetime DEFAULT NULL,
   `last_login` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `user_admin`
+--
+
+INSERT INTO `user_admin` (`user_id`, `firstname`, `lastname`, `super_user`, `created_at`, `updated_at`, `last_login`) VALUES
+(2, 'Admin', 'Luong', 1, '2022-12-02 18:00:12', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_comments`
+--
+
+CREATE TABLE `user_comments` (
+  `comment_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `parent_id` int(11) NOT NULL DEFAULT 0,
+  `text` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `user_comments`
+--
+
+INSERT INTO `user_comments` (`comment_id`, `user_id`, `product_id`, `parent_id`, `text`, `created_at`) VALUES
+(1, 1, 16, 0, 'Sản phẩm tuyệt vời', '2022-12-09 14:21:38'),
+(2, 4, 16, 1, 'Đồng tình với bạn', '2022-12-09 14:25:31');
 
 -- --------------------------------------------------------
 
@@ -221,7 +255,34 @@ CREATE TABLE `user_members` (
 --
 
 INSERT INTO `user_members` (`user_id`, `firstname`, `lastname`, `city`, `district`, `street`, `phone`, `email`, `created_at`, `updated_at`, `last_login`, `active_flg`) VALUES
-(1, 'Nguyễn Thành', 'Lương', 'ninh thuận', 'phước thuận, ninh phước', 'vạn phước', 93874578, 'luong.nt1999@gmail.com', '0000-00-00 00:00:00', NULL, NULL, 2);
+(1, 'Nguyễn Thành', 'Lương', 'ninh thuận', 'phước thuận, ninh phước', 'vạn phước', 93874578, 'luong.nt1999@gmail.com', '0000-00-00 00:00:00', NULL, NULL, 2),
+(3, 'chí', 'phèo', NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL, 0),
+(4, 'Vô', 'Danh', 'ninh thuận', 'phước thuận, ninh phước', 'vạn phước', 97234234, 'ntl.tdc.edu.vn@gmail.com', '0000-00-00 00:00:00', NULL, NULL, 2),
+(5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0000-00-00 00:00:00', NULL, NULL, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_wishlist`
+--
+
+CREATE TABLE `user_wishlist` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `user_wishlist`
+--
+
+INSERT INTO `user_wishlist` (`id`, `user_id`, `product_id`, `created_at`) VALUES
+(21, 1, 7, '2022-12-16 17:14:08'),
+(26, 5, 7, '2022-12-18 09:28:56'),
+(27, 1, 4, '2022-12-23 18:37:48'),
+(28, 1, 2, '2022-12-23 19:31:43'),
+(29, 1, 16, '2022-12-23 19:32:03');
 
 --
 -- Indexes for dumped tables
@@ -276,11 +337,27 @@ ALTER TABLE `user_admin`
   ADD PRIMARY KEY (`user_id`);
 
 --
+-- Indexes for table `user_comments`
+--
+ALTER TABLE `user_comments`
+  ADD PRIMARY KEY (`comment_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
 -- Indexes for table `user_members`
 --
 ALTER TABLE `user_members`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `unique_phone_email` (`phone`,`email`);
+
+--
+-- Indexes for table `user_wishlist`
+--
+ALTER TABLE `user_wishlist`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -290,37 +367,49 @@ ALTER TABLE `user_members`
 -- AUTO_INCREMENT for table `manufactures`
 --
 ALTER TABLE `manufactures`
-  MODIFY `manu_id` tinyint(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `manu_id` tinyint(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `protypes`
 --
 ALTER TABLE `protypes`
-  MODIFY `type_id` tinyint(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `type_id` tinyint(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `user_comments`
+--
+ALTER TABLE `user_comments`
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `user_wishlist`
+--
+ALTER TABLE `user_wishlist`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Constraints for dumped tables
@@ -345,6 +434,20 @@ ALTER TABLE `order_details`
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`manu_id`) REFERENCES `manufactures` (`manu_id`),
   ADD CONSTRAINT `products_ibfk_2` FOREIGN KEY (`type_id`) REFERENCES `protypes` (`type_id`);
+
+--
+-- Constraints for table `user_comments`
+--
+ALTER TABLE `user_comments`
+  ADD CONSTRAINT `user_comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `user_comments_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+
+--
+-- Constraints for table `user_wishlist`
+--
+ALTER TABLE `user_wishlist`
+  ADD CONSTRAINT `user_wishlist_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `user_wishlist_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

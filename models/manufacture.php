@@ -18,8 +18,23 @@ class Manufacture extends Db {
     }
 
     public function getManufactureAll() {
-        $sql = "select * from manufactures";
+        $sql = "select * from manufactures order by manu_id desc";
         $ret = parent::fetchArray( $sql );
         return $ret;
+    }
+
+    public function insert( $insert ) {
+        $sql = "insert into manufactures set $insert ";
+        parent::execute( $sql );
+    }
+
+    public function update( $update, $where ) {
+        $sql = "update manufactures set $update where $where ";
+        parent::execute( $sql );
+    }
+
+    public function delete( $manu_id ) {
+        $sql = "delete from manufactures where manu_id = $manu_id";
+        parent::execute( $sql );
     }
 }

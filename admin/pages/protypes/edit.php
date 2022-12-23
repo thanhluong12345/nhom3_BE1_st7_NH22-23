@@ -3,6 +3,10 @@
   require_once ROOT_MODEL_PATH."/db.php";
   require_once ROOT_MODEL_PATH."/protype.php";
 
+  if( isset($_GET["error"]) ) {
+    echo "<script> alert(".$_GET["error"].") </script>";
+  }
+
   $mo_type = new Protype();
   if( isset( $_GET["id"] ) ) {
     $protype = $mo_type->getProtypeById($_GET["id"]);
@@ -21,12 +25,11 @@
                   <h4 class="card-title">Nhập loại</h4>
                 </div>
                 <div class="card-body">
-                  <form action="<?=ROOT_ADMIN_URL."/pages/protypes/".(isset($protype)?"update.php":"create.php")?>">
+                  <form action="<?=ROOT_ADMIN_URL."/pages/protypes/".(isset($protype)?"update.php":"create.php")?>" method="POST">
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group">
-                          <label class="bmd-label-floating">id</label>
-                          <input name="id" type="text" value="<?=$protype["type_id"]??""?>" class="form-control" disabled>
+                          <input name="id" type="hidden" value="<?=$protype["type_id"]??""?>" class="form-control">
                         </div>
                       </div>
                     </div>

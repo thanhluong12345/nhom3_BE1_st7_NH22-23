@@ -3,6 +3,10 @@
   require_once ROOT_MODEL_PATH."/db.php";
   require_once ROOT_MODEL_PATH."/protype.php";
 
+  if( isset($_GET["error"]) ) {
+    echo "<script> alert(".$_GET["error"].") </script>";
+  }
+
   $mo_protype = new Protype();
 
   $protype_list = $mo_protype->getProtypeAll();

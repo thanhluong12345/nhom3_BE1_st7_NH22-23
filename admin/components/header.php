@@ -9,10 +9,10 @@
 
   require_once ROOT_ADMIN."/lib/func.php";
   $sidebars = array(
-    "dashboard" => array(
-      "icon" => "dashboard",
-      "url" => "index.php"
-    ),
+    // "dashboard" => array(
+    //   "icon" => "dashboard",
+    //   "url" => "index.php"
+    // ),
     "products" => array(
       "icon" => "smartphone",
       "pages" => array(
@@ -265,8 +265,8 @@
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                  <a class="dropdown-item" href="#">Profile</a>
-                  <a class="dropdown-item" href="#">Settings</a>
+                  <!-- <a class="dropdown-item" href="#">Profile</a>
+                  <a class="dropdown-item" href="#">Settings</a> -->
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="<?=ROOT_ADMIN_URL."/logout.php"?>">Log out</a>
                 </div>

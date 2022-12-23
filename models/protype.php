@@ -22,9 +22,24 @@ class Protype extends Db {
     }
 
     public function getProtypeAll() {
-        $sql = "select * from protypes";
+        $sql = "select * from protypes order by type_id desc";
         $ret = parent::fetchArray( $sql );
         return $ret;
+    }
+
+    public function insert( $insert ) {
+        $sql = "insert into protypes set $insert ";
+        parent::execute( $sql );
+    }
+
+    public function update( $update, $where ) {
+        $sql = "update protypes set $update where $where ";
+        parent::execute( $sql );
+    }
+
+    public function delete( $type_id ) {
+        $sql = "delete from protypes where type_id = ".$type_id;
+        parent::execute( $sql );
     }
 
 }

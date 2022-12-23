@@ -10,10 +10,18 @@
   $mo_member = new UserMember();
   $mo_pro = new Product();
 
-  if( isset( $_GET["id"] ) ) {
-    $order = $mo_order->getOrderById( $_GET["id"] );
-    $user_member = $mo_member->getUserMember( $order["user_id"] );
+  if( !isset( $_GET["id"] ) ) {
+    header("Location: ./list.php?error='Có lỗi vui lòng thử lại!'");
+    exit;
   }
+  $order = $mo_order->getOrderById( $_GET["id"] );
+  $user_member = $mo_member->getUserMember( $order["user_id"] );
+  
+  $total = 0;
+  foreach( $order["order_details"] as $detail ) {
+    $total += $detail["unit_price"] * $detail["quantity"];
+  }
+  
 ?>
 
 <?php require ROOT_ADMIN."/components/header.php"; ?>
@@ -24,29 +32,68 @@
             <div class="col-md-8">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title">Nhập hãng </h4>
+                  <h4 class="card-title">Chi tiết đơn hàng của "<?=$user_member["firstname"]." ".$user_member["lastname"]?>"</h4>
                 </div>
                 <div class="card-body">
-                  <form action="<?=ROOT_ADMIN_URL."/pages/manufactures/".(isset($manufacture)?"update.php":"create.php")?>">
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">id</label>
-                          <input name="id" type="text" value="<?=$manufacture["manu_id"]??""?>" class="form-control" disabled>
-                        </div>
-                      </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <label for="">Tên khách hàng:</label>
                     </div>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <label class="bmd-label-floating">Tên hãng</label>
-                          <input name="manu_name" type="text" value="<?=$manufacture["manu_name"]??""?>" class="form-control">
-                        </div>
-                      </div>
+                    <div class="col-12">
+                      <p><?=$user_member["firstname"]." ".$user_member["lastname"]?></p>
                     </div>
-                    <button type="submit" class="btn btn-primary pull-right"><?=isset($manufacture)?"Update":"Create"?></button>
-                    <div class="clearfix"></div>
-                  </form>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-12">
+                      <label for="">Địa chỉ giao hàng:</label>
+                    </div>
+                    <div class="col-12">
+                      <p><?=$order["ship_address"]?></p>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-12">
+                      <label for="">Tổng tiền thanh toán:</label>
+                    </div>
+                    <div class="col-12">
+                      <p><?=number_format($total)?> VND</p>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-12">
+                      <label for="">Ghi chú thêm:</label>
+                    </div>
+                    <div class="col-12">
+                      <p><?=$order["order_notes"]?></p>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-12">
+                      <label for="">Danh sách sản phẩm</label>
+                    </div>
+
+                    <?php foreach($order["order_details"] as $value) { ?>
+                    <?php $product = $mo_pro->getProductById($value["product_id"]); ?>
+                    <?php $price = $value["unit_price"] * $value["quantity"] ?>
+                    <div class="col-12">
+                      <table>
+                        <tr>
+                          <td><div><?=$product["name"]?></div></td>
+                        </tr>
+                        <tr>
+                        <td><div style="font-weight:bold;"><?=$price?></div></td>
+                        </tr>
+                        <tr style="height:15px;">
+                          <td style="border-bottom:1px solid #000;"></td>
+                        </tr>
+                      </table>
+                    </div>
+                    <?php } ?>
+                  </div>
                 </div>
               </div>
             </div>

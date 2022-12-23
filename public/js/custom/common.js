@@ -58,14 +58,14 @@ if (typeof window !== 'undefined') {
                     msg = result.msg
                 }
             } else {
-                document.querySelector(".wishlist-wrapper").innerHTML = result.html;
+              document.querySelector(".wishlist-wrapper").innerHTML = result.html;
             }
             Swal.fire({
                 position: 'top-center',
                 icon: icon,
                 title: msg,
                 showConfirmButton: false,
-                timer: 1000
+                timer: 500
             })
           } )
     }

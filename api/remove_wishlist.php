@@ -15,7 +15,6 @@ $user_member = new UserMember();
 $mo_wishlist = new UserwishList();
 
 $user_id = $user_member->getUserId();
-$user_wishlist = $mo_wishlist->getWishlist("user_id =".$user_id);
 
 if( !$user_member->checkLogin() ) {
     $ret_value["status"] = 0;
@@ -31,7 +30,9 @@ else {
     if( !$res ) {
         $ret_value["status"] = 0;
         $ret_value["msg"] = "Có lỗi! <br> Vui lòng thử lại sau!";
-    }else {
+    }
+    else {
+        $user_wishlist = $mo_wishlist->getWishlist("user_id =".$user_id);
         $html = 
             "<table>
             <thead>

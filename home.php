@@ -78,8 +78,8 @@
                                                 <img class="img-fluid" src="<?=ROOT_IMAGE_URL."/product/".$product["image"]?>" alt="Product">
                                             </a>
                                             <div class="item-action-behaviors">
-                                                <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look
-                                                </a>
+                                                <!-- <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look
+                                                </a> -->
                                                 <!-- <a class="item-mail" href="javascript:void(0)">Mail</a> -->
                                                 <a class="item-addwishlist" href="javascript:void(0)" onClick="addWishlist(<?=$product["id"]?>)" >Add to Wishlist</a>
                                                 <a class="item-addCart" href="javascript:void(0)" onclick="addToCart(<?=$product['id']?>)" >Add to Cart</a>
@@ -91,12 +91,12 @@
                                                 <h6 class="item-title">
                                                     <a href="<?=PAGE_URL."/single-product.php?id=".$product["id"]?>"><?=$product["name"]?></a>
                                                 </h6>
-                                                <div class="item-stars">
+                                                <!-- <div class="item-stars">
                                                     <div class='star' title="0 out of 5 - based on 0 Reviews">
                                                         <span style='width:0'></span>
                                                     </div>
                                                     <span>(0)</span>
-                                                </div>
+                                                </div> -->
                                             </div>
                                             <div class="price-template">
                                                 <div class="item-new-price">
@@ -140,8 +140,8 @@
                                                 <img class="img-fluid" src="<?=ROOT_IMAGE_URL."/product/".$product["image"]?>" alt="Product">
                                             </a>
                                             <div class="item-action-behaviors">
-                                                <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look
-                                                </a>
+                                                <!-- <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look
+                                                </a> -->
                                                 <!-- <a class="item-mail" href="javascript:void(0)">Mail</a> -->
                                                 <a class="item-addwishlist" href="javascript:void(0)" onClick="addWishlist(<?=$product["id"]?>)" >Add to Wishlist</a>
                                                 <a class="item-addCart" href="javascript:void(0)" onclick="addToCart(<?=$product['id']?>)" >Add to Cart</a>
@@ -153,12 +153,12 @@
                                                 <h6 class="item-title">
                                                     <a href="<?=PAGE_URL."/single-product.php?id=".$product["id"]?>"><?=$product["name"]?></a>
                                                 </h6>
-                                                <div class="item-stars">
+                                                <!-- <div class="item-stars">
                                                     <div class='star' title="0 out of 5 - based on 0 Reviews">
                                                         <span style='width:0'></span>
                                                     </div>
                                                     <span>(0)</span>
-                                                </div>
+                                                </div> -->
                                             </div>
                                             <div class="price-template">
                                                 <div class="item-new-price">

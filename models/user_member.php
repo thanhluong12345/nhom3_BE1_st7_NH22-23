@@ -59,7 +59,7 @@ class UserMember extends User {
         else {
             $user_member = $this->getUserMember( $check_user["user_id"] );
             if( !$user_member ) {
-                $ret["error"] = "$username not found";
+                $ret["error"] = "*Username hoặc mật khẩu không đúng!";
             } else {
                 $_SESSION["isLogged"] = true;
                 $_SESSION["USER_ID"] = $user_member["user_id"];
@@ -77,6 +77,12 @@ class UserMember extends User {
         if( !$user_id ) return array();
         $sql = "select user_id, firstname, lastname, city, district, street, phone, email, active_flg from user_members where  user_id = $user_id limit 1";
         $your_profile = parent::fetchSingle( $sql );
+        $your_profile["name"] = $your_profile["firstname"]." ".$your_profile["lastname"];
+        if( !$your_profile["lastname"] ) {
+            $sql = "select * from users where user_id = ".$user_id." ";
+            $user = parent::fetchSingle( $sql );
+            $your_profile["name"] = $user["username"];
+        }
         return $your_profile;
     }
 
@@ -120,7 +126,7 @@ class UserMember extends User {
         if( $where ) {
             $where = " where $where ";
         }
-        $sql = "select $columns from user_members $where $limit";
+        $sql = "select $columns from user_members $where $limit order by user_id desc";
         $ret = parent::fetchArray($sql);
         return $ret;
     }

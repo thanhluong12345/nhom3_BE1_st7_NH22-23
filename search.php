@@ -49,18 +49,18 @@
                     Tìm thấy <?=$cnt_product["cnt"]?> kết quả cho từ khóa
                     <i>“<?=$keyword?>”</i>
                 </h4>
-                <h4>Related searches:
+                <!-- <h4>Related searches:
                     <a href="shop-v1-root-category.php">men's clothing</a> ,
                     <a href="shop-v1-root-category.php">mobiles & tablets</a> ,
                     <a href="shop-v1-root-category.php">books & audible</a>
-                </h4>
+                </h4> -->
             </div>
             <!-- Search-Results /- -->
             <div class="row">
                 <!-- Shop-Left-Side-Bar-Wrapper -->
                 <div class="col-lg-3 col-md-3 col-sm-12">
                     <!-- Fetch-Categories-from-Root-Category  -->
-                    <div class="fetch-categories">
+                    <!-- <div class="fetch-categories">
                         <h3 class="title-name">Browse Categories</h3>
                         <ul>
                             <li>
@@ -361,43 +361,36 @@
                                 <a href="shop-v1-root-category.php">Furniture Home & Office</a>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                     <!-- Fetch-Categories-from-Root-Category  /- -->
                     <!-- Filters -->
                     <!-- Filter-Price -->
-                    <div class="facet-filter-by-price">
+                    <!-- <div class="facet-filter-by-price">
                         <h3 class="title-name">Price</h3>
                         <form class="facet-form" action="#" method="post">
-                            <!-- Final-Result -->
                             <div class="amount-result clearfix">
                                 <div class="price-from">$0</div>
                                 <div class="price-to">$3000</div>
                             </div>
-                            <!-- Final-Result /- -->
-                            <!-- Range-Slider  -->
                             <div class="price-filter"></div>
-                            <!-- Range-Slider /- -->
-                            <!-- Range-Manipulator -->
                             <div class="price-slider-range" data-min="0" data-max="5000" data-default-low="0" data-default-high="3000" data-currency="$"></div>
-                            <!-- Range-Manipulator /- -->
                             <button type="submit" class="button button-primary">Filter</button>
                         </form>
-                    </div>
+                    </div> -->
                     <!-- Filter-Price /- -->
                     <!-- Filter-Free-Shipping -->
-                    <div class="facet-filter-by-shipping">
+                    <!-- <div class="facet-filter-by-shipping">
                         <h3 class="title-name">Shipping</h3>
                         <form class="facet-form" action="#" method="post">
                             <input type="checkbox" class="check-box" id="cb-free-ship">
                             <label class="label-text" for="cb-free-ship">Free Shipping</label>
                         </form>
-                    </div>
+                    </div> -->
                     <!-- Filter-Free-Shipping /- -->
                     <!-- Filter-Rating -->
-                    <div class="facet-filter-by-rating">
+                    <!-- <div class="facet-filter-by-rating">
                         <h3 class="title-name">Rating</h3>
                         <div class="facet-form">
-                            <!-- 5 Stars -->
                             <div class="facet-link">
                                 <div class="item-stars">
                                     <div class='star'>
@@ -406,8 +399,6 @@
                                 </div>
                                 <span class="total-fetch-items">(0)</span>
                             </div>
-                            <!-- 5 Stars /- -->
-                            <!-- 4 & Up Stars -->
                             <div class="facet-link">
                                 <div class="item-stars">
                                     <div class='star'>
@@ -416,8 +407,6 @@
                                 </div>
                                 <span class="total-fetch-items">& Up (8)</span>
                             </div>
-                            <!-- 4 & Up Stars /- -->
-                            <!-- 3 & Up Stars -->
                             <div class="facet-link">
                                 <div class="item-stars">
                                     <div class='star'>
@@ -426,8 +415,6 @@
                                 </div>
                                 <span class="total-fetch-items">& Up (0)</span>
                             </div>
-                            <!-- 3 & Up Stars /- -->
-                            <!-- 2 & Up Stars -->
                             <div class="facet-link">
                                 <div class="item-stars">
                                     <div class='star'>
@@ -436,8 +423,6 @@
                                 </div>
                                 <span class="total-fetch-items">& Up (0)</span>
                             </div>
-                            <!-- 2 & Up Stars /- -->
-                            <!-- 1 & Up Stars -->
                             <div class="facet-link">
                                 <div class="item-stars">
                                     <div class='star'>
@@ -446,11 +431,8 @@
                                 </div>
                                 <span class="total-fetch-items">& Up (0)</span>
                             </div>
-                            <!-- 1 & Up Stars /- -->
                         </div>
-                    </div>
-                    <!-- Filter-Rating -->
-                    <!-- Filters /- -->
+                    </div> -->
                 </div>
                 <!-- Shop-Left-Side-Bar-Wrapper /- -->
                 <!-- Shop-Right-Wrapper -->
@@ -466,7 +448,7 @@
                             </a>
                         </div>
                         <!-- Toolbar Sorter 1  -->
-                        <div class="toolbar-sorter">
+                        <!-- <div class="toolbar-sorter">
                             <div class="select-box-wrapper">
                                 <label class="sr-only" for="sort-by">Sort By</label>
                                 <select class="select-box" id="sort-by">
@@ -477,10 +459,10 @@
                                     <option value="">Sort By: Best Rating</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- //end Toolbar Sorter 1  -->
                         <!-- Toolbar Sorter 2  -->
-                        <div class="toolbar-sorter-2">
+                        <!-- <div class="toolbar-sorter-2">
                             <div class="select-box-wrapper">
                                 <label class="sr-only" for="show-records">Show Records Per Page</label>
                                 <select class="select-box" id="show-records">
@@ -489,7 +471,7 @@
                                     <option value="">Show: 28</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- //end Toolbar Sorter 2  -->
                     </div>
                     <!-- Page-Bar /- -->
@@ -503,25 +485,15 @@
                                         <img class="img-fluid" src="<?=ROOT_IMAGE_URL."/product/".$product["image"]?>" alt="Product">
                                     </a>
                                     <div class="item-action-behaviors">
-                                        <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look</a>
-                                        <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                        <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                        <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
+                                        <!-- <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look</a> -->
+                                        <!-- <a class="item-mail" href="javascript:void(0)">Mail</a> -->
+                                        <a class="item-addwishlist" href="javascript:void(0)" onClick="addWishlist(<?=$product["id"]?>)" >Add to Wishlist</a>
+                                        <a class="item-addCart" href="javascript:void(0)" onclick="addToCart(<?=$product['id']?>)" >Add to Cart</a>
                                     </div>
                                 </div>
                                 <div class="item-content">
                                     <div class="what-product-is">
-                                        <ul class="bread-crumb">
-                                            <li class="has-separator">
-                                                <a href="shop-v1-root-category.php">Men's</a>
-                                            </li>
-                                            <li class="has-separator">
-                                                <a href="shop-v2-sub-category.php">Tops</a>
-                                            </li>
-                                            <li>
-                                                <a href="shop-v3-sub-sub-category.php">Hoodies</a>
-                                            </li>
-                                        </ul>
+                                        <?=$mo_pro->getBreadCrumbList($product["id"])?>
                                         <h6 class="item-title">
                                             <a href="single-product.php"><?=$product["name"]?></a>
                                         </h6>
@@ -530,12 +502,12 @@
                                                 <?=$product["description"]?>
                                             </p>
                                         </div>
-                                        <div class="item-stars">
+                                        <!-- <div class="item-stars">
                                             <div class='star' title="4.5 out of 5 - based on 23 Reviews">
                                                 <span style='width:67px'></span>
                                             </div>
                                             <span>(23)</span>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="price-template">
                                         <div class="item-new-price">

@@ -31,6 +31,12 @@ else if( isset($_POST["add"]) ) {
     $mo_cart->addToCart( $product_id, $quantity );
     exit;
 } 
+else if( isset($_POST["refresh"]) ) {
+    $quantity   = $_POST["quantity"];
+    //add a product to cart
+    $mo_cart->refreshCart( $product_id, $quantity );
+    exit;
+} 
 else {
     header( "Location: ".PAGE_URL."/home.php" );
     exit;

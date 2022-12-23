@@ -11,6 +11,10 @@
   $mo_pro = new Product();
 
   $order_list = $mo_order->getOrderAll();
+
+  if( isset($_GET["error"]) ) {
+    echo "<script> alert(".$_GET["error"].") </script>";
+  }
 ?>
 
 <?php require ROOT_ADMIN."/components/header.php"; ?>
@@ -62,7 +66,7 @@
                           <td>
                             <?=$order["order_id"]?>
                           </td>
-                          <td>
+                          <td style="width:120px;">
                             <?=$user_member["firstname"]." ".$user_member["lastname"]?>
                           </td>
                           <td style="width:150px;">

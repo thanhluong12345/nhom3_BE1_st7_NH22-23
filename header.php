@@ -84,7 +84,7 @@
                         <ul class="secondary-nav g-nav">
                             <li>
                                 <a style="font-weight:bold;">
-                                    <?=$mo_member->checklogin()?$your_profile["firstname"]." ".$your_profile["lastname"]:"My Account"?>
+                                    <?=$mo_member->checklogin()?$your_profile["name"]:"My Account"?>
                                     <i class="fas fa-chevron-down u-s-m-l-9"></i>
                                 </a>
                                 <ul class="g-dropdown" style="width:200px">
@@ -167,7 +167,7 @@
                                 <label class="sr-only" for="search-landscape">Search</label>
                                 <input name="keyword" id="search-landscape" type="text" class="text-field" placeholder="Nhập từ khóa tìm kiếm...">
                                 <div class="select-box-position">
-                                    <div class="select-box-wrapper select-hide">
+                                    <!-- <div class="select-box-wrapper select-hide">
                                         <label class="sr-only" for="select-category">Choose category for search</label>
                                         <select class="select-box" id="select-category">
                                             <option selected="selected" value="">
@@ -189,7 +189,7 @@
                                             <option value="">Furniture Home & Office
                                             </option>
                                         </select>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <button id="btn-search" type="submit" class="button button-primary fas fa-search"></button>
                             </form>

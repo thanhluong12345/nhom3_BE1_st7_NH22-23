@@ -131,7 +131,7 @@
                             </a>
                         </div>
                         <!-- Toolbar Sorter 1  -->
-                        <div class="toolbar-sorter">
+                        <!-- <div class="toolbar-sorter">
                             <div class="select-box-wrapper">
                                 <label class="sr-only" for="sort-by">Sort By</label>
                                 <select class="select-box" id="sort-by">
@@ -142,10 +142,10 @@
                                     <option value="">Sort By: Best Rating</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- //end Toolbar Sorter 1  -->
                         <!-- Toolbar Sorter 2  -->
-                        <div class="toolbar-sorter-2">
+                        <!-- <div class="toolbar-sorter-2">
                             <div class="select-box-wrapper">
                                 <label class="sr-only" for="show-records">Show Records Per Page</label>
                                 <select class="select-box" id="show-records">
@@ -154,7 +154,7 @@
                                     <option value="">Show: 28</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- //end Toolbar Sorter 2  -->
                     </div>
                     <!-- Page-Bar /- -->
@@ -170,7 +170,7 @@
                                         <img class="img-fluid" src="<?=ROOT_IMAGE_URL."/product/".$product["image"]?>" alt="Product">
                                     </a>
                                     <div class="item-action-behaviors">
-                                        <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look</a>
+                                        <!-- <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look</a> -->
                                         <!-- <a class="item-mail" href="javascript:void(0)">Mail</a> -->
                                         <a class="item-addwishlist" href="javascript:void(0)" onClick="addWishlist(<?=$product["id"]?>)" >Add to Wishlist</a>
                                         <a class="item-addCart" href="javascript:void(0)" onclick="addToCart(<?=$product['id']?>)" >Add to Cart</a>
@@ -186,12 +186,12 @@
                                             <p><?=$product["description"]?>
                                             </p>
                                         </div>
-                                        <div class="item-stars">
+                                        <!-- <div class="item-stars">
                                             <div class='star' title="4.5 out of 5 - based on 23 Reviews">
                                                 <span style='width:67px'></span>
                                             </div>
                                             <span>(23)</span>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="price-template">
                                         <div class="item-new-price">

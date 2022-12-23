@@ -25,7 +25,7 @@ class Product extends Db{
      * return @array()
      */
     public function getProductAll() {
-        $sql = "select * from products";
+        $sql = "select * from products order by id desc";
         $ret = parent::fetchArray( $sql );
         return $ret;
     }
@@ -43,6 +43,13 @@ class Product extends Db{
 
     public function getProductByManuId( $manu_id ) {
         $sql = "select * from products where manu_id = $manu_id ";
+        $ret = parent::fetchArray( $sql );
+        if( !$ret ) return array();
+        return $ret;
+    }
+
+    public function getProductByTypeId( $type_id ) {
+        $sql = "select * from products where type_id = $type_id ";
         $ret = parent::fetchArray( $sql );
         if( !$ret ) return array();
         return $ret;
@@ -90,6 +97,21 @@ class Product extends Db{
             </li>
         </ul>";
         return $breadcrumb_list;
+    }
+
+    public function insert( $insert ) {
+        $sql = "insert into products set $insert ";
+        parent::execute( $sql );
+    }
+
+    public function update( $update, $where ) {
+        $sql = "update products set $update where $where ";
+        parent::execute( $sql );
+    }
+
+    public function delete( $id ) {
+        $sql = "delete from products where id = $id";
+        parent::execute( $sql );
     }
 
 }

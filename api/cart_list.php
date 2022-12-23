@@ -13,9 +13,9 @@ $html =
         "<table>
             <thead>
                 <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Giá</th>
+                    <th>Số lượng</th>
                     <th>Subtotal</th>
                 </tr>
             </thead>
@@ -40,7 +40,7 @@ $html =
                 <td>
                     <div class=\"cart-quantity\">
                         <div class=\"quantity\">
-                            <input type=\"text\" class=\"quantity-text-field\" value=\"".$product["num_cart"]."\">
+                            <input type=\"text\" name=\"quantity".$product["id"]."\" class=\"quantity-text-field\" value=\"".$product["num_cart"]."\">
                             <a class=\"plus-a\" data-max=\"1000\">&#43;</a>
                             <a class=\"minus-a\" data-min=\"1\">&#45;</a>
                         </div>
@@ -49,7 +49,8 @@ $html =
                 <td>
                     <div class=\"action-wrapper\">
                         <input type=\"hidden\" name=\"product_id\" value=\"".$product["id"]."\" />
-                        <button class=\"button button-outline-secondary fas fa-sync\"></button>
+                        <button class=\"button button-outline-secondary fas fa-sync\" name=\"refresh\"
+                            onclick=\"refreshCart(".$product["id"].")\"></button>
                         <button class=\"button button-outline-secondary fas fa-trash\" name=\"delete\"
                             onclick=\"removeCart(".$product["id"].")\"></button>
                     </div>
@@ -82,15 +83,10 @@ $html .=
 "<div class=\"calculation u-s-m-b-60\">
     <div class=\"table-wrapper-2\">
         <table>
-            <thead>
-                <tr>
-                    <th colspan=\"2\">Cart Totals</th>
-                </tr>
-            </thead>
             <tbody>
                 <tr>
                     <td>
-                        <h3 class=\"calc-h3 u-s-m-b-0\">Total</h3>
+                        <h3 class=\"calc-h3 u-s-m-b-0\">Tổng tiền</h3>
                     </td>
                     <td>
                         <span class=\"calc-text\">".number_format($cart_list["total_price"])."<b> VND</b></span>

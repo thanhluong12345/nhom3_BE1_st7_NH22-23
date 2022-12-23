@@ -216,26 +216,26 @@
                     <div class="detail-tabs-wrapper u-s-p-t-80">
                         <div class="detail-nav-wrapper u-s-m-b-30">
                             <ul class="nav single-product-nav justify-content-center">
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link active" data-toggle="tab" href="#description">Mô tả</a>
-                                </li>
+                                </li> -->
                                 <!-- <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#specification">Thông số kỹ thuật</a>
                                 </li> -->
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#review">Reviews (15)</a>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                         <div class="tab-content">
                             <!-- Description-Tab -->
-                            <div class="tab-pane fade active show" id="description">
+                            <!-- <div class="tab-pane fade active show" id="description">
                                 <div class="description-whole-container">
                                     <p class="desc-p u-s-m-b-26">
                                         <?=$product_detail["description"]?>
                                     </p>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- Description-Tab /- -->
                             <!-- Specifications-Tab -->
                             <!-- <div class="tab-pane fade" id="specification">
@@ -562,7 +562,7 @@
                                             <img class="img-fluid" src="<?=ROOT_IMAGE_URL."/product/".$product["image"]?>" alt="Product">
                                         </a>
                                         <div class="item-action-behaviors">
-                                            <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look</a>
+                                            <!-- <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look</a> -->
                                             <!-- <a class="item-mail" href="javascript:void(0)">Mail</a> -->
                                             <a class="item-addwishlist" href="javascript:void(0)" onClick="addWishlist(<?=$product["id"]?>)" >Add to Wishlist</a>
                                             <a class="item-addCart" href="javascript:void(0)" onclick="addToCart(<?=$product['id']?>)" >Add to Cart</a>
@@ -584,12 +584,12 @@
                                             <h6 class="item-title">
                                                 <a href="single-product.php"><?=$product["name"]?></a>
                                             </h6>
-                                            <div class="item-stars">
+                                            <!-- <div class="item-stars">
                                                 <div class='star' title="0 out of 5 - based on 0 Reviews">
                                                     <span style='width:0'></span>
                                                 </div>
                                                 <span>(0)</span>
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <div class="price-template">
                                             <div class="item-new-price">
