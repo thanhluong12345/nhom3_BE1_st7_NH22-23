@@ -3,10 +3,6 @@
   require_once ROOT_MODEL_PATH."/db.php";
   require_once ROOT_MODEL_PATH."/protype.php";
 
-  if( isset($_GET["error"]) ) {
-    echo "<script> alert(".$_GET["error"].") </script>";
-  }
-
   $mo_type = new Protype();
   if( isset( $_GET["id"] ) ) {
     $protype = $mo_type->getProtypeById($_GET["id"]);
@@ -15,6 +11,12 @@
 ?>
 
 <?php require ROOT_ADMIN."/components/header.php"; ?>
+
+  <?php
+      if( isset($_GET["error"]) ) {
+        echo "<script> alert(".$_GET["error"].") </script>";
+      }
+    ?>
       <!-- End Navbar -->
       <div class="content">
         <div class="container-fluid">

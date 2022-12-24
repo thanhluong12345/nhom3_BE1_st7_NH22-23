@@ -4,9 +4,7 @@
   require_once ROOT_MODEL_PATH."/product.php";
   require_once ROOT_MODEL_PATH."/manufacture.php";
   require_once ROOT_MODEL_PATH."/protype.php";
-  if( isset($_GET["error"]) ) {
-    echo "<script> alert(".$_GET["error"].") </script>";
-  }
+
   $mo_pro = new Product();
   $mo_manu = new Manufacture();
   $mo_protype = new Protype();
@@ -24,6 +22,12 @@
 ?>
 
 <?php require ROOT_ADMIN."/components/header.php"; ?>
+
+<?php
+      if( isset($_GET["error"]) ) {
+        echo "<script> alert(".$_GET["error"].") </script>";
+      }
+    ?>
       <!-- End Navbar -->
       <div class="content">
         <div class="container-fluid">

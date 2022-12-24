@@ -4,10 +4,6 @@
   require_once ROOT_MODEL_PATH."/protype.php";
   require ROOT_LIB_PATH."/paginator.php";
 
-  if( isset($_GET["error"]) ) {
-    echo "<script> alert(".$_GET["error"].") </script>";
-  }
-
   $current_page = $_GET["page"]??1;
   $limit = 5;
   $lib_paginator = new Paginator();
@@ -21,6 +17,12 @@
 ?>
 
 <?php require ROOT_ADMIN."/components/header.php"; ?>
+
+    <?php
+      if( isset($_GET["error"]) ) {
+        echo "<script> alert(".$_GET["error"].") </script>";
+      }
+    ?>
       <!-- End Navbar -->
       <div class="content">
         <div class="container-fluid">

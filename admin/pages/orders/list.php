@@ -11,13 +11,15 @@
   $mo_pro = new Product();
 
   $order_list = $mo_order->getOrderAll();
-
-  if( isset($_GET["error"]) ) {
-    echo "<script> alert(".$_GET["error"].") </script>";
-  }
+  
 ?>
 
 <?php require ROOT_ADMIN."/components/header.php"; ?>
+<?php
+      if( isset($_GET["error"]) ) {
+        echo "<script> alert(".$_GET["error"].") </script>";
+      }
+    ?>
       <!-- End Navbar -->
       <div class="content">
         <div class="container-fluid">
