@@ -6,6 +6,7 @@ define("USERNAME", "root");
 define("PASSWORD", "");
 
 define("_IS_NULL", 0);
+define("_IS_USERNAME", 1);
 
 define("PROJECT_PATH", "nhom3_BE1_st7_NH22-23");
 define("ROOT_PATH", $_SERVER["DOCUMENT_ROOT"]."/".PROJECT_PATH);

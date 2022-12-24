@@ -2,14 +2,22 @@
   require_once "../../../lib/config.php";
   require_once ROOT_MODEL_PATH."/db.php";
   require_once ROOT_MODEL_PATH."/protype.php";
+  require ROOT_LIB_PATH."/paginator.php";
 
   if( isset($_GET["error"]) ) {
     echo "<script> alert(".$_GET["error"].") </script>";
   }
 
+  $current_page = $_GET["page"]??1;
+  $limit = 5;
+  $lib_paginator = new Paginator();
   $mo_protype = new Protype();
 
-  $protype_list = $mo_protype->getProtypeAll();
+  $limit_paginate = "limit ".(($current_page-1)*$limit).", $limit";
+  $protype_list = $mo_protype->getProtype( 1, $limit_paginate);
+  $cnt_protype= count($mo_protype->getProtypeAll());
+  $page_max = ceil($cnt_protype/$limit);
+  $paginate_url = ROOT_ADMIN_URL."/pages/protypes/list.php?";
 ?>
 
 <?php require ROOT_ADMIN."/components/header.php"; ?>
@@ -65,6 +73,7 @@
                         <?php } ?>
                       </tbody>
                     </table>
+                    <?=$lib_paginator->initPaginate($paginate_url, $current_page, $page_max)?>
                   </div>
                 </div>
               </div>

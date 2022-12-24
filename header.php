@@ -94,6 +94,12 @@
                                             <i class="far fa-heart u-s-m-r-9"></i>
                                             Cập nhật hồ sơ</a>
                                     </li>
+
+                                    <li>
+                                        <a href="<?=PAGE_URL."/history-order-list.php"?>">
+                                            <i class="far fa-history u-s-m-r-9"></i>
+                                            Lịch sử đặt hàng</a>
+                                    </li>
                                     <?php } ?>
 
                                     <li>

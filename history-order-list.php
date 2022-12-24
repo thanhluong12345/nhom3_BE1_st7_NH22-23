@@ -6,31 +6,31 @@
     require ROOT_MODEL_PATH."/user.php";
     require ROOT_MODEL_PATH."/user_member.php";
     require ROOT_MODEL_PATH."/product.php";
-    require ROOT_MODEL_PATH."/user_wishlist.php";
+    require ROOT_MODEL_PATH."/order.php";
 
     $mo_product = new Product();
     $user_member = new UserMember();
     $user_id = $user_member->getUserId();
-    $mo_wishlist = new UserwishList();
+    $mo_order = new Order();
 
-    $user_wishlist = $mo_wishlist->getWishlist("user_id =".$user_id);
+    $user_orders = $mo_order->getOrderByUserId($user_id);
 
 ?>
 
-<?=l_func_GetHeader("Yêu thích")?>
+<?=l_func_GetHeader("Lịch sử đặt hàng")?>
     <!-- Header /- -->
     <!-- Page Introduction Wrapper -->
     <div class="page-style-a">
         <div class="container">
             <div class="page-intro">
-                <h2>Danh sách sản phẩm yêu thích</h2>
+                <h2>Danh sách lịch sử đặt hàng của bạn</h2>
                 <ul class="bread-crumb">
                     <li class="has-separator">
                         <i class="ion ion-md-home"></i>
                         <a href="home.php">Trang chủ</a>
                     </li>
                     <li class="is-marked">
-                        <a href="wishlist.php">Sản phẩm yêu thích</a>
+                        <a href="wishlist.php">Lịch sử đặt hàng</a>
                     </li>
                 </ul>
             </div>
@@ -48,14 +48,21 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Product</th>
-                                    <th>Unit Price</th>
+                                    <th>Sản phẩm</th>
+                                    <th>Tổng tiền thanh toán</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach( $user_wishlist as $val ) { ?>
-                                <?php $product = $mo_product->getProductById($val["product_id"]); ?>
+                                <?php foreach( $user_orders as $val ) { ?>
+                                <?php 
+                                    $order_detail = $mo_order->getOrderDetail($val["order_id"]);
+                                    $product = $mo_product->getProductById($order_detail[0]["product_id"]); 
+                                    $total = 0;
+                                    foreach( $order_detail as $detail ) {
+                                        $total += $detail["unit_price"] * $detail["quantity"];
+                                    }
+                                ?>
                                 <tr>
                                     <td>
                                         <div class="cart-anchor-image">
@@ -67,13 +74,12 @@
                                     </td>
                                     <td>
                                         <div class="cart-price">
-                                            <?=number_format($product["price"])?> VND
+                                            <?=number_format($total)?> VND
                                         </div>
                                     </td>
                                     <td>
                                         <div class="action-wrapper">
-                                            <button class="button button-outline-secondary" onClick="addToCart(<?=$product["id"]?>)" >Thêm vào giỏ hàng</button>
-                                            <button class="button button-outline-secondary fas fa-trash" onClick="removeWishList(<?=$product["id"]?>)"></button>
+                                        <a href="<?=PAGE_URL."/history-order-detail.php?order_id=".$val["order_id"]?>" class="continue"> Xem chi tiết </a>
                                         </div>
                                     </td>
                                 </tr>

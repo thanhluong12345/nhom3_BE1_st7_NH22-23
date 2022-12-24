@@ -20,6 +20,16 @@ class UserwishList extends Db {
         return $wishlist;
     }
 
+
+    public function getWishListPaginate( $where = 1, $limit = "", $columns = "*" ) {
+        if(!$where) {
+            $where = 1;
+        }
+        $sql = "select $columns from user_wishlist where $where order by id desc $limit";
+        $ret = parent::fetchArray( $sql );
+        return $ret;
+    }
+
     public function addWishList( $user_id, $product_id ) {
         if( !$product_id || !$user_id ) return false;
         $where_get = " product_id = $product_id and user_id = $user_id ";

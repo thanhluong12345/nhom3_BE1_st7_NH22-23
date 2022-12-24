@@ -33,6 +33,18 @@ class Order extends Db {
         return $order_list;
     }
 
+    public function getOrderByUserId( $user_id ) {
+        $sql = "select * from orders where user_id = ".$user_id." ";
+        $ret = parent::fetchArray($sql);
+        return $ret;
+    }
+
+    public function getOrderDetail( $order_id ) {
+        $sql = "select * from order_details where order_id = ".$order_id;
+        $ret = parent::fetchArray( $sql );
+        return $ret;
+    }
+
     public function getOrderById( $order_id ) {
         $sql = "select * from orders where order_id = ".$order_id." ";
         $ret = parent::fetchSingle($sql);

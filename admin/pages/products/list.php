@@ -5,16 +5,25 @@
   require_once ROOT_MODEL_PATH."/product.php";
   require_once ROOT_MODEL_PATH."/manufacture.php";
   require_once ROOT_MODEL_PATH."/protype.php";
+  require ROOT_LIB_PATH."/paginator.php";
 
   if( isset($_GET["error"]) ) {
     echo "<script> alert(".$_GET["error"].") </script>";
   }
 
+  $current_page = $_GET["page"]??1;
+  $limit = 5;
   $mo_pro = new Product();
   $mo_manu = new Manufacture();
   $mo_protype = new Protype();
+  $lib_paginator = new Paginator();
 
-  $product_list = $mo_pro->getProductAll();
+  $limit_paginate = "limit ".(($current_page-1)*$limit).", $limit";
+  $product_list = $mo_pro->getProduct( 1, $limit_paginate);
+
+  $cnt_product = $mo_pro->countProduct();
+  $page_max = ceil($cnt_product["cnt"]/$limit);
+  $paginate_url = ROOT_ADMIN_URL."/pages/products/list.php?";
 
 ?>
 
@@ -98,6 +107,7 @@
                         <?php } ?>
                       </tbody>
                     </table>
+                    <?=$lib_paginator->initPaginate($paginate_url, $current_page, $page_max)?>
                   </div>
                 </div>
               </div>

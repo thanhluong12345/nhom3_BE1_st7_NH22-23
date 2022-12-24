@@ -6,7 +6,7 @@ class Product extends Db{
         if(!$where) {
             $where = 1;
         }
-        $sql = "select $columns from products where $where order by created_at desc $limit";
+        $sql = "select $columns from products where $where order by id desc $limit";
         $ret = parent::fetchArray( $sql );
         return $ret;
     }

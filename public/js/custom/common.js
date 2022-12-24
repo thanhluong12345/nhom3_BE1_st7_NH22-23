@@ -34,8 +34,8 @@ if (typeof window !== 'undefined') {
           } )
     }
 
-    function removeWishList( product_id ) {
-        const url = ("api/remove_wishlist.php?"+ new URLSearchParams({product_id: product_id}).toString());
+    function removeWishList( product_id, current_page ) {
+        const url = ("api/remove_wishlist.php?"+ new URLSearchParams({product_id: product_id, page: current_page}).toString());
         fetch(url, {
             method: "get",
             mode: "cors",

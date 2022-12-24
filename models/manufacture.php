@@ -1,6 +1,16 @@
 <?php
 
 class Manufacture extends Db {
+
+    public function getManufacture( $where = 1, $limit = "", $columns = "*" ) {
+        if(!$where) {
+            $where = 1;
+        }
+        $sql = "select $columns from manufactures where $where order by manu_id desc $limit";
+        $ret = parent::fetchArray( $sql );
+        return $ret;
+    }
+
     public function getManufactureLimit( $limit = 0 ) {
         $limit_where = "";
         if( $limit ) {

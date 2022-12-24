@@ -68,6 +68,7 @@
   <link href="<?=ROOT_ADMIN_URL."/"?>assets/demo/demo.css" rel="stylesheet" />
   <!-- common css -->
   <link rel="stylesheet" href="<?=ROOT_ADMIN_URL."/"?>assets/css/common.css">
+  <link rel="stylesheet" href="<?=ROOT_URL?>/public/css/bundle.css">
 </head>
 
 <body class="">
@@ -214,7 +215,7 @@
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="#pablo">Table List</a>
+            <a class="navbar-brand" href="#pablo">Trang quản lý</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>

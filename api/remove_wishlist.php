@@ -39,7 +39,6 @@ else {
                 <tr>
                     <th>Product</th>
                     <th>Unit Price</th>
-                    <th>Stock Status</th>
                     <th></th>
                 </tr>
             </thead>
@@ -58,11 +57,6 @@ else {
                     <td>
                         <div class=\"cart-price\">
                             ".number_format($product["price"])." VND"."
-                        </div>
-                    </td>
-                    <td>
-                        <div class=\"cart-stock\">
-                            In Stock
                         </div>
                     </td>
                     <td>

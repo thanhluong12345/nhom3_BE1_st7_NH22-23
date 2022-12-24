@@ -25,7 +25,8 @@ $input = array(
 
 $rules = array(
     "username" => array(
-        _IS_NULL
+        _IS_NULL,
+        _IS_USERNAME
     ),
     "password" => array(
         _IS_NULL
@@ -39,7 +40,11 @@ $mo_validator = new Validator();
 $mo_validator->validate( $input, $rules );
 
 if( $mo_validator->errors ) {
-     $errors = $errors + $mo_validator->errors;
+    $errors = $errors + $mo_validator->errors;
+}
+
+if(strcmp( $password, $confirm_password )) {
+    $errors["confirm_password"] = "Mật khẩu xác nhận không khớp";
 }
 
 if( $errors ) {
@@ -48,10 +53,7 @@ if( $errors ) {
     exit;
 }
 
-if(strcmp( $password, $confirm_password )) {
-    header("Location: ".PAGE_URL."/account.php");
-    exit;
-}
+
 
 $mo_user = new User();
 $mo_member = new UserMember();

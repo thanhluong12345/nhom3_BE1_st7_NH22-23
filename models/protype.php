@@ -1,6 +1,16 @@
 <?php
 
 class Protype extends Db {
+    
+    public function getProtype( $where = 1, $limit = "", $columns = "*" ) {
+        if(!$where) {
+            $where = 1;
+        }
+        $sql = "select $columns from protypes where $where order by type_id desc $limit";
+        $ret = parent::fetchArray( $sql );
+        return $ret;
+    }
+
     /**
      * lấy tất cả protype 
      * return @array()

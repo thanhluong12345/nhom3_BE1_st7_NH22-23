@@ -17,6 +17,12 @@ class Validator {
                         if( trim($value) == "" )
                         $this->errors["$field"] = "*Vui lòng nhập $field";
                         break;
+
+                    case _IS_USERNAME:
+                        $match = preg_match('~^[a-z]{4,8}[0-9]{0,4}$|^[a-z]{4,12}$~', $value);
+                        if( !$match )
+                        $this->errors["$field"] = "*Vui lòng nhập username theo định dạng [a-z][0-9]";
+                        break;
                     default:
                     break;
                 }
